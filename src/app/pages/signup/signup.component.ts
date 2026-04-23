@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,17 +10,28 @@ import { AuthService } from '../../auth.service';
 })
 export class SignUpComponent {
 
+  signupForm: FormGroup;
+
   constructor(
     private auth: AuthService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private fb: FormBuilder
+  ) {
+    this.signupForm = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      role: ['', Validators.required]
+    });
+  }
 
-  onSignUp(email: string, password: string, role: string) {
+  onSignUp() {
 
-    if (!email || !password || !role) {
+    if (this.signupForm.invalid) {
       alert('All fields are required');
       return;
     }
+
+    const { email, password, role } = this.signupForm.value;
 
     this.auth.signUp(email, password, role).subscribe({
       next: (res) => {

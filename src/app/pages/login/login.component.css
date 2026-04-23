@@ -20,3 +20,34 @@ button {
   color: white;
   border: none;
 }
+label {
+  display: block;
+  width: 90%;
+  margin: 10px auto 5px auto;
+  text-align: left;
+}
+/* Make container flexible */
+.container {
+  max-width: 90%;
+}
+
+/* Responsive for small screens */
+@media (max-width: 480px) {
+  .container {
+    width: 90%;
+    margin: 50px auto;
+    padding: 15px;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  label {
+    width: 100%;
+  }
+
+  button {
+    width: 100%;
+  }
+}
