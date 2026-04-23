@@ -1,53 +1,115 @@
 .container {
-  width: 320px;
-  margin: 100px auto;
-  padding: 20px;
-  text-align: center;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  width: 100%;
+  max-width: 360px;
+  margin: 96px auto;
+  padding: 28px;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+  box-sizing: border-box;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
 }
 
 input, select {
-  width: 90%;
-  padding: 10px;
-  margin: 10px 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  margin: 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  background: #ffffff;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+label {
+  display: block;
+  margin: 12px 0 6px;
+  color: #334155;
+  font-weight: 600;
 }
 
 button {
   width: 100%;
-  padding: 10px;
-  background: green;
-  color: white;
+  margin-top: 18px;
+  padding: 12px 16px;
   border: none;
-}
-label {
-  display: block;
-  text-align: left;
-  width: 90%;
-  margin: 10px auto 5px auto;
-}
-/* Make container responsive */
-.container {
-  max-width: 90%;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-/* Mobile adjustments */
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.feedback {
+  margin: 0 0 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #fee2e2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  text-align: center;
+}
+
+.redirecting-state {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  text-align: center;
+}
+
+.spinner {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 5px solid rgba(37, 99, 235, 0.12);
+  border-top-color: #2563eb;
+  animation: spin 0.9s linear infinite;
+}
+
+.redirecting-state p {
+  margin: 0;
+  color: #475569;
+  font-weight: 600;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (max-width: 480px) {
   .container {
-    width: 90%;
-    margin: 50px auto;
-    padding: 15px;
+    margin: 48px 16px;
+    padding: 20px;
   }
 
-  input, select {
-    width: 100%;
-  }
-
-  label {
-    width: 100%;
-  }
-
-  button {
-    width: 100%;
+  .redirecting-state {
+    min-height: 220px;
   }
 }

@@ -3,6 +3,11 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+interface AuthResponse {
+  success?: boolean;
+  message?: string;
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -33,16 +38,17 @@ export class LoginComponent {
     const { email, password } = this.loginForm.value;
 
     this.auth.login(email, password).subscribe({
-      next: (res) => {
-        console.log('Login success:', res);
-        alert('Login successful!');
+      next: (res: AuthResponse) => {
+        if (res?.success) {
+          this.router.navigate(['/home']);
+          return;
+        }
 
-        // 🔁 Redirect to home 
-        this.router.navigate(['/home']);
+        alert(res?.message || 'Login failed');
       },
       error: (err) => {
         console.error(err);
-        alert('Login failed');
+        alert('Unable to login right now');
       }
     });
 

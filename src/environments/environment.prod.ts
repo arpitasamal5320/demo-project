@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'https://heaven-science-sets-resolve.trycloudflare.com/authservice'
 };

@@ -1,5 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://spencer-crawford-satisfaction-promotion.trycloudflare.com'
+  apiUrl: 'https://heaven-science-sets-resolve.trycloudflare.com/authservice'
 };
-
