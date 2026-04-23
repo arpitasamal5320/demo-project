@@ -1,0 +1,17 @@
+<div class="container">
+  <h2>Sign Up</h2>
+
+  <input #email type="email" placeholder="Enter Email" />
+  <input #password type="password" placeholder="Enter Password" />
+
+  <select #role>
+    <option value="">Select Role</option>
+    <option value="HR">HR</option>
+    <option value="ADMIN">ADMIN</option>
+    <option value="EMPLOYEE">EMPLOYEE</option>
+  </select>
+
+  <button (click)="onSignUp(email.value, password.value, role.value)">
+    Sign Up
+  </button>
+</div>

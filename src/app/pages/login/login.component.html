@@ -1,0 +1,10 @@
+<div class="container">
+  <h2>Login</h2>
+
+  <input #email type="email" placeholder="Enter Email" />
+  <input #password type="password" placeholder="Enter Password" />
+
+  <button (click)="onLogin(email.value, password.value)">
+    Login
+  </button>
+</div>
