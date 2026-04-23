@@ -5,7 +5,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
-import { LogoutComponent } from './pages/logout/logout.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SignUpComponent } from './pages/signup/signup.component';
@@ -15,7 +14,6 @@ import { SignUpComponent } from './pages/signup/signup.component';
     AppComponent,
     HomeComponent,
     LoginComponent,
-    LogoutComponent,
     SignUpComponent
    
     
