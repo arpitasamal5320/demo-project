@@ -15,7 +15,7 @@ import { SignUpComponent } from './pages/signup/signup.component';
     AppComponent,
     HomeComponent,
     LoginComponent,
-   
+    
     SignUpComponent
    
     
