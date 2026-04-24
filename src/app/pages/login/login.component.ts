@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
 
 interface AuthResponse {
   message?: string;
@@ -16,8 +17,9 @@ interface AuthResponse {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
   loginForm: FormGroup;
+  feedbackMessage = '';
+  isSubmitting = false;
 
   constructor(
     private auth: AuthService,
@@ -30,37 +32,41 @@ export class LoginComponent {
     });
   }
 
-  onLogin() {
-
-    if (this.loginForm.invalid) {
-      alert('All fields are required');
+  onLogin(): void {
+    if (this.loginForm.invalid || this.isSubmitting) {
+      this.loginForm.markAllAsTouched();
+      this.feedbackMessage = 'Please complete the form correctly.';
       return;
     }
 
     const { email, password } = this.loginForm.value;
+    this.feedbackMessage = '';
+    this.isSubmitting = true;
 
-    this.auth.login(email, password).subscribe({
-      next: (res: AuthResponse) => {
-        console.log(res);
-        if (res?.message === 'success') {
-          const token = res?.token?.token;
-          if (token) {
-            localStorage.setItem('authToken', token);
+    this.auth.login(email, password)
+      .pipe(finalize(() => {
+        this.isSubmitting = false;
+      }))
+      .subscribe({
+        next: (res: AuthResponse) => {
+          if (res?.message === 'success') {
+            const token = res?.token?.token;
+
+            if (token) {
+              localStorage.setItem('authToken', token);
+              this.router.navigate(['/dashboard']);
+              return;
+            }
+
+            this.feedbackMessage = 'Token missing from response.';
+            return;
           }
-          else if (!token) {
-            alert('Token missing from response');
-          }
-          this.router.navigate(['/home']);
-          return;
+
+          this.feedbackMessage = res?.message || 'Login failed. Please try again.';
+        },
+        error: () => {
+          this.feedbackMessage = 'Unable to login right now. Please try again.';
         }
-
-        alert(res?.message || 'Login failed');
-      },
-      error: (err) => {
-        console.error(err);
-        alert('Unable to login right now');
-      }
-    });
-
+      });
   }
 }
