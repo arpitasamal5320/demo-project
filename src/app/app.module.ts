@@ -9,12 +9,14 @@ import { LoginComponent } from './pages/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SignUpComponent } from './pages/signup/signup.component';
+import { EmpBasicDetailsComponent } from './pages/emp-basic-details/emp-basic-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
+    EmpBasicDetailsComponent,
     
     SignUpComponent
    

@@ -11,6 +11,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent {
 
   loginForm: FormGroup;
+  
 
   constructor(
     private auth: AuthService,
@@ -33,12 +34,13 @@ export class LoginComponent {
     const { email, password } = this.loginForm.value;
 
     this.auth.login(email, password).subscribe({
-      next: (res) => {
-        console.log('Login success:', res);
-        alert('Login successful!');
+      next: (res: any) => {
+        if (res?.success) {
+          this.router.navigate(['/emp-basic-regis']);
+          return;
+        }
 
-        // 🔁 Redirect to home 
-        this.router.navigate(['/home']);
+        alert(res?.message || 'Login failed');
       },
       error: (err) => {
         console.error(err);
