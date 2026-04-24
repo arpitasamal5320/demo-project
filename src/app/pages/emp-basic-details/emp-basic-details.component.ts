@@ -92,21 +92,32 @@ export class EmpBasicDetailsComponent {
 
     console.log('FINAL PAYLOAD:', payload);
 
-    // ✅ CALL BACKEND API
     this.employeeService.registerEmployee(payload).subscribe({
-      next: (res) => {
-        console.log('API SUCCESS:', res);
-        this.message = 'Employee registered successfully';
+  next: (res: any) => {
+    console.log('================ SUCCESS RESPONSE ================');
+    console.log('Response:', res);
+    console.log('Message:', res?.message);
+    console.log('Full Response:', JSON.stringify(res, null, 2));
 
-        setTimeout(() => {
-          this.router.navigate(['/home']);
-        }, 800);
-      },
+    this.message = res?.message || 'Employee registered successfully';
 
-      error: (err) => {
-        console.error('API ERROR:', err);
-        this.message = 'Failed to register employee';
-      }
-    });
+    setTimeout(() => {
+      this.router.navigate(['/home']);
+    }, 800);
+  },
+
+  error: (err) => {
+    console.log('================ ERROR RESPONSE ================');
+    console.log('Status:', err.status);
+    console.log('Error Body:', err.error);
+    console.log('Backend Message:', err.error?.message);
+
+    if (err.status === 409) {
+      this.message = 'Employee already exists (duplicate entry)';
+    } else {
+      this.message = err.error?.message || 'Failed to register employee';
+    }
+  }
+});
   }
 }
