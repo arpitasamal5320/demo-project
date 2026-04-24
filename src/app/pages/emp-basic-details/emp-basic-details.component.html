@@ -1,1 +1,111 @@
-<p>emp-basic-details works!</p>
+<form [formGroup]="empForm" (ngSubmit)="onSubmit()">
+
+  <!-- ================= EMPLOYEE ================= -->
+  <div formGroupName="employee">
+
+    
+
+    <label>User ID</label>
+    <input placeholder="User ID" formControlName="user_id" />
+
+    <label>First Name</label>
+    <input placeholder="First Name" formControlName="first_name" />
+
+    <label>Last Name</label>
+    <input placeholder="Last Name" formControlName="last_name" />
+
+    <label>Phone</label>
+    <input placeholder="Phone" formControlName="phone" />
+
+    <label>Date of Birth</label>
+    <input type="date" formControlName="date_of_birth" />
+
+    <label>Gender</label>
+    <select formControlName="gender">
+      <option value="">Select Gender</option>
+      <option>MALE</option>
+      <option>FEMALE</option>
+      <option>OTHER</option>
+    </select>
+
+  </div>
+
+  <!-- ================= EMPLOYEE DETAILS ================= -->
+  <div formGroupName="employeeDetails">
+
+    <label>Address</label>
+    <input formControlName="address" />
+
+    <label>City</label>
+    <input formControlName="city" />
+
+    <label>State</label>
+    <input formControlName="state" />
+
+    <label>Country</label>
+    <input formControlName="country" />
+
+    <label>Pincode</label>
+    <input formControlName="pincode" />
+
+    <label>Emergency Contact</label>
+    <input formControlName="emergency_contact" />
+
+    <label>Marital Status</label>
+    <select formControlName="marital_status">
+      <option>SINGLE</option>
+      <option>MARRIED</option>
+    </select>
+
+    <label>Aadhar Number</label>
+    <input formControlName="aadhar_no" />
+
+    <label>Father Name</label>
+    <input formControlName="father_name" />
+
+    <label>Mother Name</label>
+    <input formControlName="mother_name" />
+
+  </div>
+
+  <!-- ================= JOB DETAILS ================= -->
+  <div formGroupName="jobDetails">
+
+    <label>Designation</label>
+    <input formControlName="designation" />
+
+    <label>Department</label>
+    <input formControlName="department" />
+
+    <label>Salary</label>
+    <input type="number" formControlName="salary" />
+
+    <label>Joining Date</label>
+    <input type="date" formControlName="joining_date" />
+
+    <label>Employee Type</label>
+    <select formControlName="employee_type">
+      <option>FULLTIME</option>
+      <option>CONTRACTUAL</option>
+      <option>INTERN</option>
+    </select>
+
+    
+
+    <label>Skills (Array)</label>
+    <input formControlName="skills" placeholder="comma separated" />
+
+    <label>Previous Org (Array)</label>
+    <input formControlName="prev_org" placeholder="comma separated" />
+
+    <label>Experience Duration</label>
+    <input type="number" formControlName="experience_duration" />
+
+  </div>
+
+  <!-- SUBMIT -->
+  <button type="submit" class="btn btn-success" (click)="onSubmit()">
+  Register
+</button>
+
+</form>

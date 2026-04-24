@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SignUpComponent } from './pages/signup/signup.component';
 import { EmpBasicDetailsComponent } from './pages/emp-basic-details/emp-basic-details.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
