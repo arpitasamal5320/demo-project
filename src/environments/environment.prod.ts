@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://heaven-science-sets-resolve.trycloudflare.com/authservice'
+  apiUrl: 'https://founded-coverage-astronomy-plugins.trycloudflare.com/authservice'
 };

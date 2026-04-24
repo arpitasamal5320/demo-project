@@ -4,8 +4,10 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 interface AuthResponse {
-  success?: boolean;
   message?: string;
+  token?: {
+    token?: string;
+  };
 }
 
 @Component({
@@ -24,7 +26,7 @@ export class LoginComponent {
   ) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
@@ -39,7 +41,15 @@ export class LoginComponent {
 
     this.auth.login(email, password).subscribe({
       next: (res: AuthResponse) => {
-        if (res?.success) {
+        console.log(res);
+        if (res?.message === 'success') {
+          const token = res?.token?.token;
+          if (token) {
+            localStorage.setItem('authToken', token);
+          }
+          else if (!token) {
+            alert('Token missing from response');
+          }
           this.router.navigate(['/home']);
           return;
         }

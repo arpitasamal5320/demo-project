@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
-  private apiUrl = `${environment.apiUrl}/login`;
+  private loginUrl = `${environment.apiUrl}/login`;
   private signupUrl = `${environment.apiUrl}/signup`;
   private formHeaders = new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded'
@@ -21,7 +21,7 @@ export class AuthService {
       .set('email', email)
       .set('password', password);
 
-    return this.http.post(this.apiUrl, body.toString(), {
+    return this.http.post(this.loginUrl, body.toString(), {
       headers: this.formHeaders
     });
   }
