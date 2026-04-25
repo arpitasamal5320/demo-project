@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -8,23 +8,32 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
-  private apiUrl = `${environment.apiUrl}/login`;
+  private loginUrl = `${environment.apiUrl}/login`;
   private signupUrl = `${environment.apiUrl}/signup`;
+  private formHeaders = new HttpHeaders({
+    'Content-Type': 'application/x-www-form-urlencoded'
+  });
 
   constructor(private http: HttpClient) {}
 
   login(email: string, password: string): Observable<any> {
-    return this.http.post(this.apiUrl, {
-      email: email,
-      password: password
+    const body = new HttpParams()
+      .set('email', email)
+      .set('password', password);
+
+    return this.http.post(this.loginUrl, body.toString(), {
+      headers: this.formHeaders
     });
   }
 
   signUp(email: string, password: string, role: string): Observable<any> {
-    return this.http.post(this.signupUrl, {
-      email: email,
-      password: password,
-      role: role
+    const body = new HttpParams()
+      .set('email', email)
+      .set('password', password)
+      .set('role', role);
+
+    return this.http.post(this.signupUrl, body.toString(), {
+      headers: this.formHeaders
     });
   }
 }

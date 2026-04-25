@@ -1,21 +1,37 @@
+<div class="page-shell">
+  <h1 class="page-title">EMS</h1>  
+  <div class="container">
+    <ng-container *ngIf="!isRedirecting; else redirectingState">
+      <h2>Sign Up</h2>
 
-<div class="container">
-  <h2>Sign Up</h2>
+      <p class="feedback" *ngIf="feedbackMessage">{{ feedbackMessage }}</p>
 
-  <form [formGroup]="signupForm" (ngSubmit)="onSignUp()">
-    <label>Email</label>
-    <input formControlName="email" type="email" placeholder="Enter Email" />
-    <label>Password</label>
-    <input formControlName="password" type="password" placeholder="Enter Password" />
+      <form [formGroup]="signupForm" (ngSubmit)="onSignUp()">
+        <label for="signup-email">Email</label>
+        <input id="signup-email" formControlName="email" type="email" placeholder="Enter Email" />
 
-    <select formControlName="role">
-      <option value="">Select Role</option>
-      <option value="HR">HR</option>
-      <option value="ADMIN">ADMIN</option>
-      <option value="EMPLOYEE">EMPLOYEE</option>
-    </select>
+        <label for="signup-password">Password</label>
+        <input id="signup-password" formControlName="password" type="password" placeholder="Enter Password" />
 
-    <button type="submit">Sign Up</button>
+        <label for="signup-role">Role</label>
+        <select id="signup-role" formControlName="role">
+          <option value="">Select Role</option>
+          <option value="HR">HR</option>
+          <option value="ADMIN">ADMIN</option>
+          <option value="EMPLOYEE">EMPLOYEE</option>
+        </select>
 
-  </form>
+        <button type="submit" [disabled]="isSubmitting || isRedirecting">
+          {{ isSubmitting ? 'Signing Up...' : 'Sign Up' }}
+        </button>
+      </form>
+    </ng-container>
+
+    <ng-template #redirectingState>
+      <div class="redirecting-state" aria-live="polite">
+        <div class="spinner"></div>
+        <p>Redirecting to login...</p>
+      </div>
+    </ng-template>
+  </div>
 </div>

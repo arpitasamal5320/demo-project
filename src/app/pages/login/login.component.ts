@@ -2,6 +2,14 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
+
+interface AuthResponse {
+  message?: string;
+  token?: {
+    token?: string;
+  };
+}
 
 @Component({
   selector: 'app-login',
@@ -9,9 +17,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-
   loginForm: FormGroup;
   
+  feedbackMessage = '';
+  isSubmitting = false;
 
   constructor(
     private auth: AuthService,
@@ -20,33 +29,45 @@ export class LoginComponent {
   ) {
     this.loginForm = this.fb.group({
       email: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  onLogin() {
-
-    if (this.loginForm.invalid) {
-      alert('All fields are required');
+  onLogin(): void {
+    if (this.loginForm.invalid || this.isSubmitting) {
+      this.loginForm.markAllAsTouched();
+      this.feedbackMessage = 'Please complete the form correctly.';
       return;
     }
 
     const { email, password } = this.loginForm.value;
+    this.feedbackMessage = '';
+    this.isSubmitting = true;
 
-    this.auth.login(email, password).subscribe({
-      next: (res: any) => {
-        if (res?.success) {
-          this.router.navigate(['/emp-basic-regis']);
-          return;
+    this.auth.login(email, password)
+      .pipe(finalize(() => {
+        this.isSubmitting = false;
+      }))
+      .subscribe({
+        next: (res: AuthResponse) => {
+          if (res?.message === 'success') {
+            const token = res?.token?.token;
+
+            if (token) {
+              localStorage.setItem('authToken', token);
+              this.router.navigate(['/emp-basic-regis']);
+              return;
+            }
+
+            this.feedbackMessage = 'Token missing from response.';
+            return;
+          }
+
+          this.feedbackMessage = res?.message || 'Login failed. Please try again.';
+        },
+        error: () => {
+          this.feedbackMessage = 'Unable to login right now. Please try again.';
         }
-
-        alert(res?.message || 'Login failed');
-      },
-      error: (err) => {
-        console.error(err);
-        alert('Login failed');
-      }
-    });
-
+      });
   }
 }
