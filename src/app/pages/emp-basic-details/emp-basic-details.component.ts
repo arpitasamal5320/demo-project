@@ -21,7 +21,7 @@ export class EmpBasicDetailsComponent {
 
     this.empForm = this.fb.group({
 
-      // ================= EMPLOYEE =================
+      // employee details
       employee: this.fb.group({
         user_id: [''],
         first_name: ['', Validators.required],
@@ -31,7 +31,7 @@ export class EmpBasicDetailsComponent {
         gender: ['', Validators.required],
       }),
 
-      // ================= EMPLOYEE DETAILS =================
+      // employee's personal details
       employeeDetails: this.fb.group({
         address: ['', Validators.required],
         city: ['', Validators.required],
@@ -45,7 +45,7 @@ export class EmpBasicDetailsComponent {
         mother_name: ['', Validators.required],
       }),
 
-      // ================= JOB DETAILS =================
+      // job details
       jobDetails: this.fb.group({
         designation: ['', Validators.required],
         department: ['', Validators.required],
@@ -61,7 +61,6 @@ export class EmpBasicDetailsComponent {
     });
   }
 
-  // ================= SUBMIT =================
   onSubmit() {
 
     console.log('SUBMIT CLICKED');
@@ -75,7 +74,7 @@ export class EmpBasicDetailsComponent {
 
     const formValue = this.empForm.value;
 
-    // Convert comma-separated strings into arrays
+    // conversion of comma separated values into array
     const payload = {
       ...formValue,
       jobDetails: {
@@ -102,7 +101,7 @@ export class EmpBasicDetailsComponent {
     this.message = res?.message || 'Employee registered successfully';
 
     setTimeout(() => {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/dashboard']);
     }, 800);
   },
 
