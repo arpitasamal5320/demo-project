@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
+import { EmailValidator } from 'src/app/core/validators/email.validator';
 
 interface AuthResponse {
   message?: string;
@@ -28,7 +29,7 @@ export class LoginComponent {
     private fb: FormBuilder
   ) {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required],
+      email: ['', Validators.required, EmailValidator],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
