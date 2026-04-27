@@ -8,8 +8,8 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
-  private loginUrl = `${environment.apiUrl}/login`;
-  private signupUrl = `${environment.apiUrl}/signup`;
+  private loginUrl = `${environment.authUrl}/login`;
+  private signupUrl = `${environment.authUrl}/signup`;
   private formHeaders = new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded'
   });

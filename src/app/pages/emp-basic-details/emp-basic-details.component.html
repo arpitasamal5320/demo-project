@@ -17,11 +17,6 @@
 
         <div class="field-grid">
           <div class="field field--4">
-            <label for="user-id">User ID</label>
-            <input id="user-id" placeholder="User ID" formControlName="user_id" />
-          </div>
-
-          <div class="field field--4">
             <label for="first-name">First Name</label>
             <input id="first-name" placeholder="First Name" formControlName="first_name" />
           </div>
@@ -110,7 +105,7 @@
           <div class="field field--4">
             <label for="aadhar-no">Aadhar Number</label>
             <input id="aadhar-no" type="text" inputmode="numeric" placeholder="Aadhar number" formControlName="aadhar_no" />
-            <p class="error" *ngIf="empForm.get('employeeDetails.aadhar_no')?.touched && empForm.get('employeeDetails.aadhar_no')?.errors?.['invalidAadharNumber']">Invalid phone number</p>
+            <p class="error" *ngIf="empForm.get('employeeDetails.aadhar_no')?.touched && empForm.get('employeeDetails.aadhar_no')?.errors?.['invalidAadharNumber']">Invalid Aadhar number</p>
           </div>
 
           <div class="field field--4">
@@ -155,7 +150,7 @@
           <div class="field field--4">
             <label for="salary">Salary</label>
             <input id="salary" type="number" min="0" placeholder="Salary" formControlName="salary" />
-            <p class="error" *ngIf="empForm.get('jobDetails.salary')?.touched && empForm.get('jobDetails.salary')?.errors?.['invalidSalary']">Invalid phone number</p>
+            <p class="error" *ngIf="empForm.get('jobDetails.salary')?.touched && empForm.get('jobDetails.salary')?.errors?.['invalidSalary']">Invalid salary format</p>
           </div>
 
           <div class="field field--4">

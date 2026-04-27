@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -17,7 +17,7 @@ interface AuthResponse {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent{
   loginForm: FormGroup;
   
   feedbackMessage = '';
@@ -29,7 +29,7 @@ export class LoginComponent {
     private fb: FormBuilder
   ) {
     this.loginForm = this.fb.group({
-      email: ['', Validators.required, EmailValidator],
+      email: ['', [Validators.required, EmailValidator]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
@@ -56,7 +56,15 @@ export class LoginComponent {
 
             if (token) {
               localStorage.setItem('authToken', token);
-              this.router.navigate(['/emp-basic-regis']);
+            
+              const empId = localStorage.getItem('employeeId');
+            
+              if (empId) {
+                this.router.navigate(['/dashboard']);
+              } else {
+                this.router.navigate(['/emp-basic-regis']);
+              }
+            
               return;
             }
 

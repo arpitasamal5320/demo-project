@@ -26,7 +26,6 @@ export class EmpBasicDetailsComponent {
 
       // employee details
       employee: this.fb.group({
-        user_id: [''],
         first_name: ['', Validators.required],
         last_name: ['', Validators.required],
         phone: ['', [Validators.required, PhoneValidator]],
@@ -102,6 +101,9 @@ export class EmpBasicDetailsComponent {
         console.log('Full Response:', JSON.stringify(res, null, 2));
 
         this.message = res?.message || 'Employee registered successfully';
+
+        const empId = res.data.employee.id;
+        localStorage.setItem('employeeId', empId);
 
         setTimeout(() => {
           this.router.navigate(['/dashboard']);

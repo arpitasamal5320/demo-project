@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class EmployeeService {
 
-  private empRegisterUrl = `${environment.apiUrl}/employees`;
+  private empRegisterUrl = `${environment.apiUrl}/employeeservice`;
 
   constructor(private http: HttpClient) {}
 

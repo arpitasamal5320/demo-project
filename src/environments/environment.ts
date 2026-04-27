@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://.com/authservice'
+  authUrl: 'https://charlotte-urge-faculty-economics.trycloudflare.com/authservice',
+  apiUrl: 'https://charlotte-urge-faculty-economics.trycloudflare.com'
 };
