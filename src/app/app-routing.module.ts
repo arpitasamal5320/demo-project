@@ -12,9 +12,20 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
+<<<<<<< HEAD
   { path: 'emp-basic-regis', component:EmpBasicDetailsComponent},
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'dashboard', component: DashboardComponent}
+=======
+<<<<<<< Updated upstream
+  { path: 'home', component: HomeComponent },
+  { path: 'emp-basic-regis', component:EmpBasicDetailsComponent}
+=======
+  { path: 'emp-basic-regis', component:EmpBasicDetailsComponent,canActivate:[AuthGuard]},
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'dashboard', component: DashboardComponent,canActivate:[AuthGuard]}
+>>>>>>> Stashed changes
+>>>>>>> fbcfefc (API + dashboard feature changes)
 ];
 
 @NgModule({
