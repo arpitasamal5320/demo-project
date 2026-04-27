@@ -1,8 +1,14 @@
 <div class="dashboard-page">
-  <header class="dashboard-header">
-    <h1 class="page-title">EMS</h1>
-    <span class="profile"></span>
-  </header>
-  <div class="sidebar"></div>
-  <section class="content"></section>
+  <app-header [title]="'Dashboard'"></app-header>
+
+  <div class="dashboard-body">
+    <app-sidebar></app-sidebar>
+
+    <section class="content">
+      <div class="content-panel">
+        <h3 class="content-title">Dashboard Overview</h3>
+        <p class="content-text">Welcome to EMS. Use the sidebar to open Employees Details, Edit Profile, or Attendance Management.</p>
+      </div>
+    </section>
+  </div>
 </div>

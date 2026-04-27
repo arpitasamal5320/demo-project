@@ -14,6 +14,11 @@ import { EmpBasicDetailsComponent } from './pages/emp-basic-details/emp-basic-de
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { EmployeesDetailsComponent } from './pages/dashboard/employees-details/employees-details.component';
+import { EditProfileComponent } from './pages/dashboard/edit-profile/edit-profile.component';
+import { AttendanceMgmtComponent } from './pages/dashboard/attendance-mgmt/attendance-mgmt.component';
+import { HeaderComponent } from './pages/ui/header/header.component';
+import { SidebarComponent } from './pages/ui/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,12 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
     LoginComponent,
     EmpBasicDetailsComponent,
     SignUpComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    EmployeesDetailsComponent,
+    EditProfileComponent,
+    AttendanceMgmtComponent,
+    HeaderComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,

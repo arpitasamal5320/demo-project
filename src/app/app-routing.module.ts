@@ -7,6 +7,9 @@ import { EmpBasicDetailsComponent } from './pages/emp-basic-details/emp-basic-de
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
+import { EmployeesDetailsComponent } from './pages/dashboard/employees-details/employees-details.component';
+import { EditProfileComponent } from './pages/dashboard/edit-profile/edit-profile.component';
+import { AttendanceMgmtComponent } from './pages/dashboard/attendance-mgmt/attendance-mgmt.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -19,10 +22,20 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   {
-    path:
-      'dashboard',
-    component: DashboardComponent,
+    path: 'employees-details',
+    component: EmployeesDetailsComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'edit-profile',
+    component: EditProfileComponent,
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'attendance-mgmt',
+    component: AttendanceMgmtComponent,
     canActivate: [AuthGuard]
   }
 ];

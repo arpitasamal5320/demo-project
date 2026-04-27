@@ -16,6 +16,7 @@
         </div>
 
         <div class="field-grid">
+
           <div class="field field--4">
             <label for="first-name">First Name</label>
             <input id="first-name" placeholder="First Name" formControlName="first_name" />
@@ -134,7 +135,15 @@
 
           <div class="field field--4">
             <label for="department">Department</label>
-            <input id="department" placeholder="Department" formControlName="department" />
+            <select id="department" formControlName="department">
+              <option value="">Select Department</option>
+              <option value="BUSINESS">BUSINESS</option>
+              <option value="IT">IT</option>
+              <option value="WEBDEV">WEBDEV</option>
+              <option value="AI">AI</option>
+              <option value="MOBILEDEV">MOBILEDEV</option>
+              <option value="IOSDEV">IOSDEV</option>
+            </select>
           </div>
 
           <div class="field field--4">
