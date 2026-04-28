@@ -10,20 +10,20 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
     const token = localStorage.getItem('authToken');
     
-    const isRegistred = localStorage.getItem('isRegistred') === 'true';
+    const isRegistered = localStorage.getItem('isRegistered') === 'true';
     
     if (!token) {
       return this.router.parseUrl('/login');
     }
     
-    if (!isRegistred) {
+    if (!isRegistered) {
       if (state.url === '/emp-basic-regis') {
         return true; 
       }
       return this.router.parseUrl('/emp-basic-regis');
     }
     
-    if (isRegistred && state.url === '/emp-basic-regis') {
+    if (isRegistered && state.url === '/emp-basic-regis') {
        return this.router.parseUrl('/dashboard');
     }
 
