@@ -1,0 +1,44 @@
+label {
+  margin: 0;
+  color: #334155;
+  font-size: 14px;
+}
+
+.form-select {
+  min-width: 180px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  box-shadow: none;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 14px;
+  border: 1px solid rgba(148,163,184,.25);
+}
+
+table {
+  width: 100%;
+  background: white;
+  margin: 0;
+}
+
+th.mat-header-cell {
+  background: #b3d0ec;
+  color: #334155;
+  font-weight: 700;
+  border-bottom: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+td.mat-cell {
+  color: #475569;
+  border-bottom: 1px solid #b4b7ba;
+  border-right: 1px solid #e2e8f0;
+  text-align: center;
+}
+
+tr.mat-row:hover {
+  background: #f8fafc;
+}

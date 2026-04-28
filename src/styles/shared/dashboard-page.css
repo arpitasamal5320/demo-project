@@ -1,7 +1,7 @@
 .dashboard-page {
 	min-height: 100vh;
-	margin-top: 5vw;
 	display: flex;
+	padding-top: 5rem;
 	flex-direction: column;
 	overflow: hidden;
 	background:
@@ -19,12 +19,17 @@
 	flex: 1;
 	min-width: 0;
 	box-sizing: border-box;
+	margin-left: var(--sidebar-expanded);
+    transition: margin-left 0.25s ease;
 	overflow: auto;
+}
+
+body.sidebar-collapsed .dashboard-page .content {
+    margin-left: var(--sidebar-collapsed);
 }
 
 .dashboard-page .content-panel {
 	min-height: calc(100vh - 9rem);
-	border-radius: 16px;
 	border: 1px solid rgba(148, 163, 184, 0.24);
 	background: #ffffff;
 	box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
