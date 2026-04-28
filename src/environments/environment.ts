@@ -6,4 +6,5 @@ export const environment = {
   authUrl: 'https://charlotte-urge-faculty-economics.trycloudflare.com/authservice',
   apiUrl: 'https://charlotte-urge-faculty-economics.trycloudflare.com'
 
+ 
 };

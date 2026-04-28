@@ -1,0 +1,40 @@
+<aside class="sidebar" [class.sidebar-collapsed]="isCollapsed">
+  <div class="sidebar-top">
+    <button
+      type="button"
+      class="menu-btn"
+      (click)="toggleSidebar()"
+      aria-label="Toggle sidebar"
+      title="Toggle sidebar"
+    >
+      <i class="fa-solid fa-bars"></i>
+    </button>
+    <h1 class="page-title">EMS</h1>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a
+      routerLink="/dashboard"
+      routerLinkActive="active"
+      class="nav-item"
+    >
+      <i class="fa-solid fa-house"></i>
+      <span class="label">Dashboard</span>
+    </a>
+
+    <a routerLink="/employees-details" routerLinkActive="active" class="nav-item">
+      <i class="fa-solid fa-users"></i>
+      <span class="label">Employees Details</span>
+    </a>
+
+    <a routerLink="/edit-profile" routerLinkActive="active" class="nav-item">
+      <i class="fa-solid fa-user-pen"></i>
+      <span class="label">Edit Profile</span>
+    </a>
+
+    <a routerLink="/attendance-mgmt" routerLinkActive="active" class="nav-item">
+      <i class="fa-solid fa-calendar-check"></i>
+      <span class="label">Attendance Mgmt</span>
+    </a>
+  </nav>
+</aside>

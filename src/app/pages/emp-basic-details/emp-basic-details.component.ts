@@ -117,6 +117,9 @@ export class EmpBasicDetailsComponent {
 
         this.message = res?.message || 'Employee registered successfully';
 
+        const empId = res.data.employee.id;
+        localStorage.setItem('employeeId', empId);
+
         setTimeout(() => {
           this.router.navigate(['/dashboard']);
         }, 800);

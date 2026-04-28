@@ -9,8 +9,10 @@ export class AuthGuard implements CanActivate {
   
   canActivate(): boolean | UrlTree {
     const token = localStorage.getItem('authToken');
-    if (token) return true;
-    return this.router.parseUrl('/login');
+    const empId = localStorage.getItem('employeeId');
+    if (!token) return this.router.parseUrl('/login');
+    if (!empId) return this.router.parseUrl('/emp-basic-regis');
+    return true;
   }
   
 }
