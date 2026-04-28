@@ -1,4 +1,18 @@
 <header class="header">
   <h2 class="header-title">{{ title }}</h2>
-  <span class="header-profile">EMP</span>
+
+  <div class="profile-wrapper">
+    <span class="header-profile" (click)="togglePopup($event)">
+      EMP
+    </span>
+
+    <div
+      class="profile-popup"
+      *ngIf="showPopup"
+      (click)="$event.stopPropagation()"
+    >
+      <span class="profile-option">Profile</span>
+      <span class="logout" (click)="logout()">Logout</span>
+    </div>
+  </div>
 </header>

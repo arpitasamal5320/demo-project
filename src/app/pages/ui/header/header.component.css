@@ -30,3 +30,32 @@
   font-weight: 700;
   background: rgba(255, 255, 255, 0.12);
 }
+
+.profile-wrapper {
+  position: relative;
+}
+
+.profile-popup {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  width: 140px;
+  background: white;
+  color: black;
+  border-radius: 8px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.profile-option,
+.logout {
+  display: block;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.profile-option:hover,
+.logout:hover {
+  background: #f3f4f6;
+}

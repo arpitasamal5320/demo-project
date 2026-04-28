@@ -29,7 +29,7 @@ export class SignUpComponent implements OnDestroy {
     private fb: FormBuilder
   ) {
     this.signupForm = this.fb.group({
-      email: ['', Validators.required, EmailValidator],
+      email: ['', [Validators.required, EmailValidator]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       role: ['', Validators.required]
     });
