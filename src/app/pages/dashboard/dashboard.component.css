@@ -1,1 +1,96 @@
-/* Shared shell styles are defined in src/styles/shared/dashboard-page.css. */
+/* The Main Row Container */
+.stat-row {
+    background: #eaf4ebce;
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.4);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+    
+    display: flex;
+    align-items: center; /* Vertically center all sections */
+    padding: 16px 24px;
+    
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    overflow: hidden; /* Keeps the circle contained */
+}
+
+.stat-row:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
+}
+
+/* 1. Icon Section (Left) */
+.stat-icon-section {
+    flex: 0 0 70px; /* Fixed width for the icon area */
+    display: flex;
+    justify-content: flex-start;
+}
+
+.icon-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+/* 2. Data Section (Middle - Expands) */
+.stat-data-section {
+    flex: 1; /* Takes up remaining space, pushing data right */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 10px;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #64748b; /* Subtle grey for labels */
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+}
+
+.stat-value {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #0f172a; /* Dark navy for values */
+    margin: 0;
+}
+
+/* 3. Action Section (Right) */
+.stat-action-section {
+    flex: 0 0 auto; /* Keep button width natural */
+    display: flex;
+    justify-content: flex-end;
+}
+
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: #e2e7ec;
+    color: #1e293b;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.action-btn:hover {
+    background: #c4ccd7;
+}
+
+.action-btn i {
+    font-size: 0.9rem;
+}
+
+/* Color Palette - Applied to the icon background */
+.bg-navy   { background-color: #34495e; }
+.bg-teal   { background-color: #16a085; }
+.bg-purple { background-color: #9b59b6; }
+.bg-red    { background-color: #e74c3c; }

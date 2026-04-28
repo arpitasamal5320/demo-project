@@ -1,74 +1,131 @@
-<div class="mb-3 text-center">
-
-  <label class="me-2"><strong>Filter by Department:</strong></label>
-<select #deptSelect
-        class="form-select w-auto d-inline-block"
-        (change)="filterByDepartment(deptSelect.value)">
-
-  <option value="ALL">All</option>
-
-  <option *ngFor="let dept of departments" [value]="dept">
-    {{ dept }}
-  </option>
-
-</select>
+<div class="dashboard-page">
+	<app-header [title]="'Employees Details'"></app-header>
   
-
-</div>
-<div class="container mt-4">
-
-  <h3 class="mb-3 text-center">Employee Table</h3>
-
-  <table mat-table [dataSource]="dataSource" class="table table-bordered table-striped mat-elevation-z8">
-
-    <!-- First Name -->
-    <ng-container matColumnDef="first_name">
-      <th mat-header-cell *matHeaderCellDef> First Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.first_name}} </td>
-    </ng-container>
-
-    <!-- Last Name -->
-    <ng-container matColumnDef="last_name">
-      <th mat-header-cell *matHeaderCellDef> Last Name </th>
-      <td mat-cell *matCellDef="let element"> {{element.last_name}} </td>
-    </ng-container>
-
-    <!-- Designation -->
-    <ng-container matColumnDef="designation">
-      <th mat-header-cell *matHeaderCellDef> Designation </th>
-      <td mat-cell *matCellDef="let element"> {{element.designation}} </td>
-    </ng-container>
-
-    <!-- Employee Type -->
-    <ng-container matColumnDef="emp_type">
-      <th mat-header-cell *matHeaderCellDef> Employee Type </th>
-      <td mat-cell *matCellDef="let element"> {{element.emp_type}} </td>
-    </ng-container>
-
-    <!-- Gender -->
-    <ng-container matColumnDef="gender">
-      <th mat-header-cell *matHeaderCellDef> Gender </th>
-      <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
-    </ng-container>
-
-    <!-- Joining Date -->
-    <ng-container matColumnDef="joining_date">
-      <th mat-header-cell *matHeaderCellDef> Joining Date </th>
-      <td mat-cell *matCellDef="let element"> {{element.joining_date}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="phone">
-  <th mat-header-cell *matHeaderCellDef> Phone </th>
-  <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
-</ng-container>
-<ng-container matColumnDef="email">
-  <th mat-header-cell *matHeaderCellDef> Email </th>
-  <td mat-cell *matCellDef="let element"> {{element.email}} </td>
-</ng-container>
-    <!-- Header + Rows -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-  </table>
-
-</div>
+	<div class="dashboard-body">
+	  <app-sidebar></app-sidebar>
+  
+	  <section class="content">
+		<div class="content-panel">
+  
+		  <div class="d-flex justify-content-start align-items-center gap-2 mb-3">
+			<label class="mb-0"><strong>Filter by Department:</strong></label>
+  
+			<select
+			  #deptSelect
+			  class="form-select w-auto"
+			  (change)="filterByDepartment(deptSelect.value)"
+			>
+			  <option value="ALL">All</option>
+  
+			  <option
+				*ngFor="let dept of departments"
+				[value]="dept"
+			  >
+				{{ dept }}
+			  </option>
+			</select>
+		  </div>  
+  
+		  <div class="table-wrapper">
+			<table
+			  mat-table
+			  [dataSource]="dataSource"
+			  class="table table-hover mb-0 mat-elevation-z0"
+			>
+  
+			  <!-- Sl No -->
+			  <ng-container matColumnDef="sl_no">
+				<th mat-header-cell *matHeaderCellDef>Sl. No</th>
+				<td mat-cell *matCellDef="let element; let i = index">
+				  {{ i + 1 }}
+				</td>
+			  </ng-container>
+  
+  
+			  <!-- First Name -->
+			  <ng-container matColumnDef="first_name">
+				<th mat-header-cell *matHeaderCellDef>First Name</th>
+				<td mat-cell *matCellDef="let element">
+				  {{ element.first_name }}
+				</td>
+			  </ng-container>
+  
+  
+			  <!-- Last Name -->
+			  <ng-container matColumnDef="last_name">
+				<th mat-header-cell *matHeaderCellDef>Last Name</th>
+				<td mat-cell *matCellDef="let element">
+				  {{ element.last_name }}
+				</td>
+			  </ng-container>
+  
+  
+			  <!-- Designation -->
+			  <ng-container matColumnDef="designation">
+				<th mat-header-cell *matHeaderCellDef>Designation</th>
+				<td mat-cell *matCellDef="let element">
+				  {{ element.designation }}
+				</td>
+			  </ng-container>
+  
+  
+			  <!-- Employee Type -->
+			  <ng-container matColumnDef="emp_type">
+				<th mat-header-cell *matHeaderCellDef>Employee Type</th>
+				<td mat-cell *matCellDef="let element">
+				  {{ element.emp_type }}
+				</td>
+			  </ng-container>
+  
+  
+			  <!-- Gender -->
+			  <ng-container matColumnDef="gender">
+				<th mat-header-cell *matHeaderCellDef>Gender</th>
+				<td mat-cell *matCellDef="let element">
+				  {{ element.gender }}
+				</td>
+			  </ng-container>
+  
+  
+			  <!-- Joining Date -->
+			  <ng-container matColumnDef="joining_date">
+				<th mat-header-cell *matHeaderCellDef>Joining Date</th>
+				<td mat-cell *matCellDef="let element">
+				  {{ element.joining_date }}
+				</td>
+			  </ng-container>
+  
+  
+			  <!-- Phone -->
+			  <ng-container matColumnDef="phone">
+				<th mat-header-cell *matHeaderCellDef>Phone</th>
+				<td mat-cell *matCellDef="let element">
+				  {{ element.phone }}
+				</td>
+			  </ng-container>
+  
+  
+			  <!-- Email -->
+			  <ng-container matColumnDef="email">
+				<th mat-header-cell *matHeaderCellDef>Email</th>
+				<td mat-cell *matCellDef="let element">
+				  {{ element.email }}
+				</td>
+			  </ng-container>
+  
+  
+			  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+			</table>
+			<mat-paginator
+				[pageSize]="5"
+				[pageSizeOptions]="[5,10,15]"
+				showFirstLastButtons
+				(page)="onPageChange($event)">
+			  </mat-paginator>
+		  </div>
+  
+		</div>
+	  </section>
+	</div>
+  </div>

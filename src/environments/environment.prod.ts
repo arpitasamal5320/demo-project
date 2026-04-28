@@ -2,7 +2,7 @@ export const environment = {
 
   production: true,
 
-  authUrl: 'https://aruba-view-airlines-integration.trycloudflare.com/authservice',
-  apiUrl: 'https://aruba-view-airlines-integration.trycloudflare.com'
+ authUrl: 'https://diving-substances-standards-leon.trycloudflare.com/authservice',
+  apiUrl: 'https://diving-substances-standards-leon.trycloudflare.com'
 
 };

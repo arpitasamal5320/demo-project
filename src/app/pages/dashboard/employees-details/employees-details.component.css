@@ -1,191 +1,44 @@
-/* 🔥 Full page background + centering */
-:host {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  background-color: #000;
-  min-height: 100vh;
-  padding: 20px;
-}
-
-/* 🔥 Container (centered block) */
-.container {
-  background-color: #000;
-  padding: 15px;
-  border-radius: 10px;
-
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
-  text-align: center;
-
-  box-shadow: 0 0 15px rgba(33, 150, 243, 0.15);
-}
-
-/* 🔥 Title */
-h3 {
-  color: #2196f3;
-  font-size: clamp(18px, 2.5vw, 26px);
-  text-shadow: 
-    0 1px 2px rgb(245, 245, 245),
-    0 3px 8px rgba(194, 224, 249, 0.4);
-  margin-bottom: 15px;
-}
-
-/* 🔥 Filter section (centered) */
-.mb-3 {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-}
-
-/* 🔥 Label */
 label {
-  color: #fff;
+  margin: 0;
+  color: #334155;
   font-size: 14px;
 }
 
-/* 🔥 Dropdown */
-select.form-select {
-  background-color: #000;
-  color: #fff;
-  border: 1px solid #2196f3;
-  padding: 6px 10px;
-  border-radius: 5px;
-  min-width: 150px;
-
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-
-  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='20' viewBox='0 0 24 24' width='20'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 16px;
-
-  padding-right: 35px;
-  transition: all 0.25s ease;
+.form-select {
+  min-width: 180px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  box-shadow: none;
 }
 
-/* 🔥 Hover effect */
-select.form-select:hover,
-select.form-select:focus {
-  transform: scale(1.05);
-  border-color: #64b5f6;
-  box-shadow: 
-    0 0 6px rgba(100, 181, 246, 0.6),
-    0 0 12px rgba(144, 202, 249, 0.4);
-  outline: none;
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: 14px;
+  border: 1px solid rgba(148,163,184,.25);
 }
 
-/* 🔥 Table wrapper */
-.table {
-  width: 100%;
-  overflow-x: auto;   /* 👈 allows scroll instead of breaking */
-  display: block;
-  margin: 0 auto;
-}
-
-/* 🔥 Table */
 table {
   width: 100%;
-  min-width: 600px;   /* 👈 FIXED (was 900px) */
-  margin: 0 auto;
-  background-color: #000;
-  color: #fff;
-  border-collapse: collapse;
+  background: white;
+  margin: 0;
 }
 
-/* 🔥 Header */
 th.mat-header-cell {
-  background-color: #000;
-  color: #2196f3;
-  font-size: 13px;
-  padding: 10px;
-  border-bottom: 2px solid #2196f3;
+  background: #b3d0ec;
+  color: #334155;
+  font-weight: 700;
+  border-bottom: 1px solid #e2e8f0;
+  border-right: 1px solid #e2e8f0;
+  text-align: center;
 }
 
-/* 🔥 Cells */
 td.mat-cell {
-  color: #fff;   /* 👈 FIXED (was too dark) */
-  font-size: 13px;
-  padding: 10px;
-  border-bottom: 1px solid #333;
+  color: #475569;
+  border-bottom: 1px solid #b4b7ba;
+  border-right: 1px solid #e2e8f0;
+  text-align: center;
 }
 
-/* 🔥 Row hover */
 tr.mat-row:hover {
-  background-color: #111;
-}
-
-/* 🔥 Zebra rows */
-tr.mat-row:nth-child(even) {
-  background-color: #0a0a0a;
-}
-
-/* ========================= */
-/* 📱 RESPONSIVE FIXES       */
-/* ========================= */
-
-/* Tablet */
-@media (max-width: 992px) {
-  .container {
-    max-width: 95%;
-  }
-
-  table {
-    min-width: 500px;
-  }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-
-  :host {
-    display: block; /* 👈 prevents flex breaking layout */
-  }
-
-  .container {
-    width: 100%;
-    padding: 10px;
-  }
-
-  h3 {
-    font-size: 18px;
-  }
-
-  th.mat-header-cell,
-  td.mat-cell {
-    font-size: 12px;
-    padding: 6px;
-  }
-
-  select.form-select {
-    width: 100%;
-    max-width: 300px;
-  }
-
-  table {
-    min-width: 450px;
-  }
-}
-
-/* Small mobile */
-@media (max-width: 480px) {
-
-  table {
-    min-width: 380px;
-  }
-
-  th.mat-header-cell,
-  td.mat-cell {
-    font-size: 11px;
-    padding: 5px;
-  }
-
-  h3 {
-    font-size: 16px;
-  }
+  background: #f8fafc;
 }
