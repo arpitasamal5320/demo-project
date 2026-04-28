@@ -7,13 +7,6 @@ import { AadharValidator } from 'src/app/core/validators/aadhar.validator';
 import { PhoneValidator } from 'src/app/core/validators/phone.validator';
 import { SalaryValidator } from 'src/app/core/validators/salary.validator';
 
-
-
-import { AadharValidator } from 'src/app/core/validators/aadhar.validator';
-import { PhoneValidator } from 'src/app/core/validators/phone.validator';
-import { SalaryValidator } from 'src/app/core/validators/salary.validator';
-import { debounceTime } from 'rxjs';
-
 @Component({
   selector: 'app-emp-basic-details',
   templateUrl: './emp-basic-details.component.html',
@@ -32,9 +25,6 @@ export class EmpBasicDetailsComponent {
 
     this.empForm = this.fb.group({
 
-
-
-
       employee: this.fb.group({
         first_name: ['', Validators.required],
         last_name: ['', Validators.required],
@@ -42,9 +32,6 @@ export class EmpBasicDetailsComponent {
         date_of_birth: ['', Validators.required],
         gender: ['', Validators.required],
       }),
-
-
-
 
       employeeDetails: this.fb.group({
         address: ['', Validators.required],
@@ -59,9 +46,6 @@ export class EmpBasicDetailsComponent {
         mother_name: ['', Validators.required],
       }),
 
-
-
-
       jobDetails: this.fb.group({
         designation: ['', Validators.required],
         department: ['', Validators.required],
@@ -70,24 +54,15 @@ export class EmpBasicDetailsComponent {
         employee_type: ['', Validators.required],
         status: ['ACTIVE'],
 
-        // ✅ STRING INPUT (textarea)
         skills: [''],
-
-        // ✅ STRING INPUT (textarea) — FIXED COMMA ISSUE HERE
         prev_org: [''],
-
         experience_duration: ['', Validators.required]
       })
 
     });
   }
 
-
-
-
   onSubmit() {
-
-    console.log('SUBMIT CLICKED');
 
     this.empForm.markAllAsTouched();
 
@@ -98,12 +73,9 @@ export class EmpBasicDetailsComponent {
 
     const formValue = this.empForm.value;
 
-
-
-
+    // ✅ FINAL PAYLOAD (CLEAN)
     const payload = {
       employee: formValue.employee,
-
       employeeDetails: formValue.employeeDetails,
 
       jobDetails: {
@@ -114,10 +86,9 @@ export class EmpBasicDetailsComponent {
         employee_type: formValue.jobDetails.employee_type,
         status: formValue.jobDetails.status,
 
-        // ✅ required field
         past_experience: !!formValue.jobDetails.prev_org,
 
-        // ✅ STRING → ARRAY OF OBJECTS
+        // string → array of objects
         prev_org: formValue.jobDetails.prev_org
           ? formValue.jobDetails.prev_org.split(',').map((x: string) => ({
               company: x.trim(),
@@ -125,7 +96,7 @@ export class EmpBasicDetailsComponent {
             }))
           : [],
 
-        // ✅ STRING → ARRAY
+        // string → array
         skills: formValue.jobDetails.skills
           ? formValue.jobDetails.skills.split(',').map((x: string) => x.trim())
           : [],
@@ -136,61 +107,24 @@ export class EmpBasicDetailsComponent {
 
     const token = localStorage.getItem('authToken') || '';
 
+    console.log('FINAL PAYLOAD:', payload);
 
+    // ✅ SINGLE API CALL ONLY (FIXED)
     this.employeeService.registerEmployee(payload).subscribe({
       next: (res: any) => {
-        console.log('================ SUCCESS RESPONSE ================');
-        console.log('Response:', res);
-        console.log('Message:', res?.message);
-        console.log('Full Response:', JSON.stringify(res, null, 2));
 
+        console.log('SUCCESS RESPONSE:', res);
 
         this.message = res?.message || 'Employee registered successfully';
-
-    this.message = res?.message || 'Employee registered successfully';
-
-    const payloadWithToken = {
-      ...payload,
-      token
-    };
-
-    console.log('FINAL PAYLOAD:', payloadWithToken);
-
-    this.employeeService.registerEmployee(payloadWithToken).subscribe({
-      next: (res: any) => {
-        this.message = res?.message || 'Employee registered successfully';
-
-
-
 
         setTimeout(() => {
           this.router.navigate(['/dashboard']);
         }, 800);
       },
 
-
       error: (err) => {
-        console.log('================ ERROR RESPONSE ================');
-        console.log('Status:', err.status);
-        console.log('Error Body:', err.error);
-        console.log('Backend Message:', err.error?.message);
 
-
-  error: (err) => {
-    console.log('================ ERROR RESPONSE ================');
-    console.log('Status:', err.status);
-    console.log('Error Body:', err.error);
-    console.log('Backend Message:', err.error?.message);
-
-    if (err.status === 409) {
-      this.message = 'Employee already exists (duplicate entry)';
-    } else {
-      this.message = err.error?.message || 'Failed to register employee';
-    }
-  }
-});
-
-      error: (err) => {
+        console.log('ERROR RESPONSE:', err);
 
         if (err.status === 409) {
           this.message = 'Employee already exists (duplicate entry)';
@@ -199,7 +133,5 @@ export class EmpBasicDetailsComponent {
         }
       }
     });
-
-
   }
 }

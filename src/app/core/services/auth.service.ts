@@ -8,24 +8,13 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
-<<<<<<< HEAD
+  // ✅ Use ONE source (apiUrl OR authUrl — not both)
   private loginUrl = `${environment.apiUrl}/login`;
   private signupUrl = `${environment.apiUrl}/signup`;
+
   private formHeaders = new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded'
   });
-=======
-<<<<<<< Updated upstream
-  private apiUrl = `${environment.apiUrl}/login`;
-  private signupUrl = `${environment.apiUrl}/signup`;
-=======
-  private loginUrl = `${environment.authUrl}/login`;
-  private signupUrl = `${environment.authUrl}/signup`;
-  private formHeaders = new HttpHeaders({
-    'Content-Type': 'application/x-www-form-urlencoded'
-  });
->>>>>>> Stashed changes
->>>>>>> fbcfefc (API + dashboard feature changes)
 
   constructor(private http: HttpClient) {}
 

@@ -1,44 +1,46 @@
-import { HttpClient } from '@angular/common/http';
-<<<<<<< Updated upstream
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
-=======
-import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
->>>>>>> Stashed changes
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
 
-<<<<<<< HEAD
-  private empRegisterUrl = `${environment.apiUrl}/employees`;
-=======
-<<<<<<< Updated upstream
-  private baseUrl = 'https://maritime-button-orchestra-within.trycloudflare.com';
->>>>>>> fbcfefc (API + dashboard feature changes)
+  // ✅ single correct endpoint
+  private empRegisterUrl = `${environment.apiUrl}/employeeservice`;
 
   constructor(private http: HttpClient) {}
 
-  registerEmployee(data: any): Observable<any> {
-    return this.http.post(this.empRegisterUrl, data);
-  }
-=======
-  constructor(private http: HttpClient) {}
-
-  registerEmployee(payload: any) {
-    const token = localStorage.getItem('authToken') || '';
->>>>>>> Stashed changes
-
-    return this.http.post(
-      `${environment.apiUrl}/employeeservice`,
-      payload,
+    getEmployeeData() {
+    return [
       {
-        headers: {
-          Authorization: token.startsWith('Bearer') ? token : `Bearer ${token}`
+        employee: {
+          first_name: "Crazy",
+          last_name: "Verma",
+          gender: "MALE"
+        },
+        jobDetails: {
+          designation: "Backend Developer",
+          employee_type: "FULLTIME",
+          joining_date: "2025-01-10"
         }
       }
-    );
+    ];
+  }
+
+  
+  registerEmployee(payload: any): Observable<any> {
+
+    const token = localStorage.getItem('authToken') || '';
+
+    const headers = new HttpHeaders({
+      Authorization: token.startsWith('Bearer')
+        ? token
+        : `Bearer ${token}`
+    });
+
+    return this.http.post(this.empRegisterUrl, payload, { headers });
   }
 }
