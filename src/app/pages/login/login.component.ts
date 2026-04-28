@@ -1,9 +1,10 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { EmailValidator } from 'src/app/core/validators/email.validator';
+import { CheckRegistrationService } from 'src/app/core/services/check-registration.service';
 
 interface AuthResponse {
   message?: string;
@@ -17,16 +18,17 @@ interface AuthResponse {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent{
+export class LoginComponent {
   loginForm: FormGroup;
-  
+
   feedbackMessage = '';
   isSubmitting = false;
 
   constructor(
     private auth: AuthService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private crs: CheckRegistrationService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, EmailValidator]],
@@ -46,9 +48,11 @@ export class LoginComponent{
     this.isSubmitting = true;
 
     this.auth.login(email, password)
-      .pipe(finalize(() => {
-        this.isSubmitting = false;
-      }))
+      .pipe(
+        finalize(() => {
+          this.isSubmitting = false;
+        })
+      )
       .subscribe({
         next: (res: AuthResponse) => {
           if (res?.message === 'success') {
@@ -56,15 +60,29 @@ export class LoginComponent{
 
             if (token) {
               localStorage.setItem('authToken', token);
-            
-              const empId = localStorage.getItem('employeeId');
-            
-              if (empId) {
-                this.router.navigate(['/dashboard']);
-              } else {
-                this.router.navigate(['/emp-basic-regis']);
-              }
-            
+
+              this.crs.checkRegistrationStatus().subscribe({
+                next: (statusRes: any) => {
+                  const isRegistered = !!statusRes.isRegistered;
+
+                  localStorage.setItem(
+                    'isRegistered',
+                    String(isRegistered)
+                  );
+
+                  if (isRegistered) {
+                    this.router.navigate(['/dashboard']);
+                  } else {
+                    this.router.navigate(['/emp-basic-regis']);
+                  }
+                },
+
+                error: () => {
+                  this.feedbackMessage =
+                    'Failed to verify account status.';
+                }
+              });
+
               return;
             }
 
@@ -72,10 +90,12 @@ export class LoginComponent{
             return;
           }
 
-          this.feedbackMessage = res?.message || 'Login failed. Please try again.';
+          this.feedbackMessage =
+            res?.message || 'Login failed. Please try again.';
         },
+
         error: () => {
-          this.feedbackMessage = 'Unable to login right now. Please try again.';
+          this.feedbackMessage = 'Login failed. Please try again.';
         }
       });
   }
