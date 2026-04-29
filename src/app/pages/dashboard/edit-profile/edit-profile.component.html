@@ -1,16 +1,133 @@
-<p>edit-profile works!</p>
-
 <div class="dashboard-page">
-	<app-header [title]="'Edit Profile'"></app-header>
+  <app-header [title]="'Employees Details'"></app-header>
 
-	<div class="dashboard-body">
-		<app-sidebar></app-sidebar>
+  <div class="dashboard-body">
+    <app-sidebar></app-sidebar>
 
-		<section class="content">
-			<div class="content-panel">
-				<h3 class="content-title">Profile Settings</h3>
-				<p class="content-text">Use </p>
-			</div>
-		</section>
-	</div>
+    <section class="content">
+      <div class="content-panel">
+
+        <div class="page-shell employee-page">
+
+          <!-- ✅ HEADER (important for your CSS) -->
+          <div class="form-header">
+            <p class="form-eyebrow">Employee Profile</p>
+            <h2>Edit Profile</h2>
+            <p class="feedback" *ngIf="message">{{ message }}</p>
+          </div>
+
+          <div class="container employee-container">
+
+            <form class="employee-form" [formGroup]="editForm" (ngSubmit)="onUpdate()">
+
+              <!-- EMPLOYEE BASIC -->
+              <section class="section-card" formGroupName="employee">
+                <div class="section-heading">
+                  <p class="section-index">Section 01</p>
+                  <h3>Employee Details</h3>
+                </div>
+
+                <div class="field-grid">
+                  <div class="field field--4">
+                    <label>First Name</label>
+                    <input formControlName="first_name" />
+                  </div>
+
+                  <div class="field field--4">
+                    <label>Last Name</label>
+                    <input formControlName="last_name" />
+                  </div>
+
+                  <div class="field field--4">
+                    <label>Phone</label>
+                    <input formControlName="phone" />
+                  </div>
+
+                  <div class="field field--4">
+                    <label>DOB</label>
+                    <input type="date" formControlName="date_of_birth" />
+                  </div>
+
+                  <div class="field field--4">
+                    <label>Gender</label>
+                    <select formControlName="gender">
+                      <option value="">Select</option>
+                      <option value="MALE">MALE</option>
+                      <option value="FEMALE">FEMALE</option>
+                      <option value="OTHER">OTHER</option>
+                    </select>
+                  </div>
+                </div>
+              </section>
+
+              <!-- PERSONAL -->
+              <section class="section-card" formGroupName="employeeDetails">
+                <div class="section-heading">
+                  <p class="section-index">Section 02</p>
+                  <h3>Personal Details</h3>
+                </div>
+
+                <div class="field field--12">
+                  <label>Address</label>
+                  <textarea formControlName="address"></textarea>
+                </div>
+
+                <div class="field-grid">
+                  <div class="field"><input formControlName="city" placeholder="City" /></div>
+                  <div class="field"><input formControlName="state" placeholder="State" /></div>
+                  <div class="field"><input formControlName="country" placeholder="Country" /></div>
+                  <div class="field"><input formControlName="pincode" placeholder="Pincode" /></div>
+                  <div class="field"><input formControlName="emergency_contact" placeholder="Emergency Contact" /></div>
+                  <div class="field"><input formControlName="aadhar_no" placeholder="Aadhar No" /></div>
+                </div>
+              </section>
+
+              <!-- JOB -->
+              <section class="section-card" formGroupName="jobDetails">
+                <div class="section-heading">
+                  <p class="section-index">Section 03</p>
+                  <h3>Job Details</h3>
+                </div>
+
+                <div class="field-grid">
+                  <div class="field"><input formControlName="designation" placeholder="Designation" /></div>
+
+                  <div class="field">
+                    <select formControlName="department">
+                      <option value="">Department</option>
+                      <option value="IT">IT</option>
+                      <option value="AI">AI</option>
+                      <option value="WEBDEV">WEBDEV</option>
+                    </select>
+                  </div>
+
+                  <div class="field">
+                    <input type="number" formControlName="salary" placeholder="Salary" />
+                  </div>
+
+                  <div class="field">
+                    <input type="date" formControlName="joining_date" />
+                  </div>
+
+                  <div class="field">
+                    <input type="number" formControlName="experience_duration" placeholder="Experience" />
+                  </div>
+
+                  <div class="field field--12">
+                    <textarea formControlName="skills" placeholder="Skills"></textarea>
+                  </div>
+                </div>
+              </section>
+
+              <div class="form-actions">
+                <button type="submit">Update Profile</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </div>
 </div>

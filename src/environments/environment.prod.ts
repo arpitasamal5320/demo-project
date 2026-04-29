@@ -1,8 +1,8 @@
 export const environment = {
 
-  production: true,
+  production: false,
 
- authUrl: 'https://diving-substances-standards-leon.trycloudflare.com/authservice',
-  apiUrl: 'https://diving-substances-standards-leon.trycloudflare.com'
+ authUrl: 'https://previews-celebrity-accomplish-differ.trycloudflare.com/authservice',
+  apiUrl: 'https://previews-celebrity-accomplish-differ.trycloudflare.com'
 
 };
