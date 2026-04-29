@@ -63,12 +63,11 @@ export class LoginComponent {
 
               this.crs.checkRegistrationStatus().subscribe({
                 next: (statusRes: any) => {
-                  const isRegistered = !!statusRes.isRegistered;
+                  const isRegistered = !!statusRes.data.isRegistered;
+                  const userId = statusRes.data.id;
 
-                  localStorage.setItem(
-                    'isRegistered',
-                    String(isRegistered)
-                  );
+                  localStorage.setItem('isRegistered', String(isRegistered));
+                  localStorage.setItem('userId', userId);
 
                   if (isRegistered) {
                     this.router.navigate(['/dashboard']);

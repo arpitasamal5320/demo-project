@@ -8,6 +8,7 @@ import {
 import { EmployeeService } from 'src/app/core/services/employee.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-employees-details',
@@ -43,6 +44,7 @@ export class EmployeesDetailsComponent implements OnInit, AfterViewInit {
   ];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   dataSource = new MatTableDataSource<any>([]);
   departments: string[] = [
@@ -70,16 +72,17 @@ export class EmployeesDetailsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   loadEmployees(offset: number, limit: number): void {
+    console.log('done here');
     this.employeeService
       .getEmployeeData(this.selectedDepartment, offset, limit)
       .subscribe((result: any) => {
 
         const rows = (result.data || []).map((res: any) => ({
-          first_name: res?.first_name ?? '',
-          last_name: res?.last_name ?? '',
+          name: `${res?.first_name ?? ''} ${res?.last_name ?? ''}`.trim(),
           designation: res?.jobDetails?.designation ?? '',
           emp_type: res?.jobDetails?.employee_type ?? '',
           gender: res?.gender ?? '',
@@ -95,6 +98,7 @@ export class EmployeesDetailsComponent implements OnInit, AfterViewInit {
   }
 
   filterByDepartment(dept: string): void {
+    console.log('done department');
     this.selectedDepartment = dept;
 
     if (this.paginator) {
@@ -122,8 +126,8 @@ export class EmployeesDetailsComponent implements OnInit, AfterViewInit {
   }
 
   resizeColumn = (event: MouseEvent): void => {
-    const delta = event.pageX - this.startX
-    const newWidth = this.startWidth + delta;
+    const diff = event.pageX - this.startX
+    const newWidth = this.startWidth + diff;
     if (newWidth > 80) this.columnWidths[this.currentColumn] = newWidth;
   }
 
