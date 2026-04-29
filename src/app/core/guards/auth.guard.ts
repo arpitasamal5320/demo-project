@@ -1,10 +1,18 @@
 import { Injectable } from '@angular/core';
+// Router for navigation
+// canActivate interface for router protection
+// UrlTree represents redirect path
+// ActivatedRouteSnapshot for current route details
+// RouterStateSnapshot for current URL details
 import { Router, CanActivate, UrlTree, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
+// marks class as injectable service
 @Injectable({
+  // makes one global object for whole app, usable everywhere
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+  // runs when object for AuthGuard class is created, Angular injects router object
   constructor(private router: Router) { }
   
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
