@@ -31,27 +31,28 @@
 			  mat-table
 			  [dataSource]="dataSource"
 			  class="table table-hover mb-0 mat-elevation-z0"
+			  matSort
 			>
   
 			  <!-- Sl No -->
 			  <ng-container matColumnDef="sl_no">
 				<th mat-header-cell *matHeaderCellDef [style.width.px]="columnWidths['sl_no']">
-					Sl. No<span class="resize-handle" (mousedown)="startResize($event,'sl_no')"></span>
+					Sl. No<span class="resize-handle" (mousedown)="startResize($event,'sl_no'); $event.stopPropagation()"></span>
 				</th>
 				<td mat-cell *matCellDef="let element; let i = index" [style.width.px]="columnWidths['sl_no']">
-				  {{ i + 1 }}
+				  {{ (paginator.pageIndex * paginator.pageSize) + i + 1 }}
 				</td>
 			  </ng-container>
   
   
 			  <!-- Name -->
 			  <ng-container matColumnDef="name">
-				<th mat-header-cell *matHeaderCellDef [style.width.px]="columnWidths['name']">
-					Name<span class="resize-handle" (mousedown)="startResize($event,'name')"></span>
+				<th mat-header-cell *matHeaderCellDef [style.width.px]="columnWidths['name']" mat-sort-header>
+					Name<span class="resize-handle" (mousedown)="startResize($event,'name'); $event.stopPropagation()"></span>
 				</th>
 				<td mat-cell *matCellDef="let element" [style.width.px]="columnWidths['name']"
 				>
-				  {{ (element.first_name || '') + ' ' + (element.last_name || '') }}
+				  {{element.name}}
 				</td>
 			  </ng-container>
   
@@ -59,7 +60,7 @@
 			  <!-- Designation -->
 			  <ng-container matColumnDef="designation">
 				<th mat-header-cell *matHeaderCellDef [style.width.px]="columnWidths['designation']">
-					Designation<span class="resize-handle" (mousedown)="startResize($event,'designation')"></span>
+					Designation<span class="resize-handle" (mousedown)="startResize($event,'designation'); $event.stopPropagation()"></span>
 				</th>
 				<td mat-cell *matCellDef="let element" [style.width.px]="columnWidths['designation']">
 				  {{ element.designation }}
@@ -70,7 +71,7 @@
 			  <!-- Employee Type -->
 			  <ng-container matColumnDef="emp_type">
 				<th mat-header-cell *matHeaderCellDef [style.width.px]="columnWidths['emp_type']">
-					Employee Type<span class="resize-handle" (mousedown)="startResize($event,'emp_type')"></span>
+					Employee Type<span class="resize-handle" (mousedown)="startResize($event,'emp_type'); $event.stopPropagation()"></span>
 				</th>
 				<td mat-cell *matCellDef="let element" [style.width.px]="columnWidths['emp_type']">
 				  {{ element.emp_type }}
@@ -81,7 +82,7 @@
 			  <!-- Gender -->
 			  <ng-container matColumnDef="gender">
 				<th mat-header-cell *matHeaderCellDef [style.width.px]="columnWidths['gender']">
-					Gender<span class="resize-handle" (mousedown)="startResize($event,'gender')"></span>
+					Gender<span class="resize-handle" (mousedown)="startResize($event,'gender'); $event.stopPropagation()"></span>
 				</th>
 				<td mat-cell *matCellDef="let element" [style.width.px]="columnWidths['gender']">
 				  {{ element.gender }}
@@ -92,7 +93,7 @@
 			  <!-- Joining Date -->
 			  <ng-container matColumnDef="joining_date">
 				<th mat-header-cell *matHeaderCellDef [style.width.px]="columnWidths['joining_date']">
-					Joining Date<span class="resize-handle" (mousedown)="startResize($event,'joining_date')"></span>
+					Joining Date<span class="resize-handle" (mousedown)="startResize($event,'joining_date'); $event.stopPropagation()"></span>
 				</th>
 				<td mat-cell *matCellDef="let element" [style.width.px]="columnWidths['joining_date']">
 				  {{ element.joining_date }}
@@ -103,7 +104,7 @@
 			  <!-- Phone -->
 			  <ng-container matColumnDef="phone">
 				<th mat-header-cell *matHeaderCellDef [style.width.px]="columnWidths['phone']">
-					Phone<span class="resize-handle" (mousedown)="startResize($event,'phone')"></span>
+					Phone<span class="resize-handle" (mousedown)="startResize($event,'phone'); $event.stopPropagation()"></span>
 				</th>
 				<td mat-cell *matCellDef="let element" [style.width.px]="columnWidths['phone']">
 				  {{ element.phone }}
@@ -114,7 +115,7 @@
 			  <!-- Email -->
 			  <ng-container matColumnDef="email">
 				<th mat-header-cell *matHeaderCellDef [style.width.px]="columnWidths['email']">
-					Email<span class="resize-handle" (mousedown)="startResize($event,'email')"></span>
+					Email<span class="resize-handle" (mousedown)="startResize($event,'email'); $event.stopPropagation()"></span>
 				</th>
 				<td mat-cell *matCellDef="let element" [style.width.px]="columnWidths['email']">
 				  {{ element.email }}

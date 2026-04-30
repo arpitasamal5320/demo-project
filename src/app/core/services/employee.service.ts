@@ -10,8 +10,8 @@ export class EmployeeService {
 
   private empRegisterUrl = `${environment.apiUrl}/employeeservice`;
   private empDataFetchUrl = `${environment.apiUrl}/employeeservice`;
-  private empUpdateUrl = `${environment.apiUrl}/employeeservice`; // base URL
-
+  private empUpdateUrl = `${environment.apiUrl}/employeeservice`;
+ 
   constructor(private http: HttpClient) {}
 
   getEmployeeData(department: string, offset: number, limit: number) {
@@ -28,8 +28,7 @@ export class EmployeeService {
     console.log(`This is result ${JSON.stringify(result)}`);
     return result;
   }
-
-  // optional: GET SINGLE EMPLOYEE (for edit page)
+ 
   getEmployeeById(id: string): Observable<any> {
     return this.http.get(`${this.empDataFetchUrl}/${id}`);
   }
