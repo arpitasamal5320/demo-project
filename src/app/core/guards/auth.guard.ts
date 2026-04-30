@@ -36,7 +36,7 @@ export class AuthGuard implements CanActivate {
       return this.router.parseUrl('/emp-basic-regis');
     }
     
-    if (isRegistered && state.url === '/emp-basic-regis') {
+    if (isRegistered && state.url.includes('/emp-basic-regis')) {
        return this.router.parseUrl('/dashboard');
     }
 

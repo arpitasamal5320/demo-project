@@ -73,7 +73,6 @@ export class EditProfileComponent implements OnInit {
  
         const data = res.data;
  
-        // update correct ID from backend
         this.employeeId = data.employee.id;
  
         this.editForm.patchValue({

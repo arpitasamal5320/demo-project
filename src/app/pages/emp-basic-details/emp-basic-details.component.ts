@@ -104,7 +104,7 @@ export class EmpBasicDetailsComponent {
 
         const empId = res.data.employee.id;
         localStorage.setItem('employeeId', empId);
-        localStorage.setItem('isRegistred', 'true');
+        localStorage.setItem('isRegistered', 'true');
 
         setTimeout(() => {
           this.router.navigate(['/dashboard']);
