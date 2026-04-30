@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 // ActivatedRouteSnapshot for current route details
 // RouterStateSnapshot for current URL details
 import { Router, CanActivate, UrlTree, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { SessionService } from '../services/session.service';
 
 // marks class as injectable service
 @Injectable({
@@ -13,16 +14,20 @@ import { Router, CanActivate, UrlTree, ActivatedRouteSnapshot, RouterStateSnapsh
 })
 export class AuthGuard implements CanActivate {
   // runs when object for AuthGuard class is created, Angular injects router object
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private session: SessionService
+  ) { }
   
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree {
     const token = localStorage.getItem('authToken');
-    
-    const isRegistered = localStorage.getItem('isRegistered') === 'true';
-    
-    if (!token) {
+
+    if (!token || this.session.isExpired(token)) {
+      this.session.clearSession();
       return this.router.parseUrl('/login');
     }
+    
+    const isRegistered = localStorage.getItem('isRegistered') === 'true';
     
     if (!isRegistered) {
       if (state.url === '/emp-basic-regis') {

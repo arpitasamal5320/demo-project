@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { EmailValidator } from 'src/app/core/validators/email.validator';
 import { CheckRegistrationService } from 'src/app/core/services/check-registration.service';
+import { SessionService } from 'src/app/core/services/session.service';
 
 interface AuthResponse {
   message?: string;
@@ -28,7 +29,8 @@ export class LoginComponent {
     private auth: AuthService,
     private router: Router,
     private fb: FormBuilder,
-    private crs: CheckRegistrationService
+    private crs: CheckRegistrationService,
+    private session: SessionService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, EmailValidator]],
@@ -59,7 +61,7 @@ export class LoginComponent {
             const token = res?.token?.token;
             
             if (token) {
-              localStorage.setItem('authToken', token);
+              this.session.startSession(token);
 
               this.crs.checkRegistrationStatus().subscribe({
                 next: (statusRes: any) => {

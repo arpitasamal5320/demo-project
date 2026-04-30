@@ -8,9 +8,12 @@ import { AttendanceService } from 'src/app/core/services/attendance.service';
 })
 export class AttendanceMgmtComponent implements OnInit{
 
-  pageSize: number = 0;
-  pageIndex: number = 0;
   totalRecords: number = 0;
+  totalPresent: number = 0;
+  totalAbsent: number = 0;
+  allAttendance: any[] = [];
+  // totalLeaves: number = 0;
+  // totalWFH: number = 0;
 
   displayedColumns: string[] = [
     'slNo',
@@ -21,22 +24,23 @@ export class AttendanceMgmtComponent implements OnInit{
     'status'
   ];
 
-  dataSource: any[] = [
-    // {
-    //   slNo: 1,
-    //   date: this.getToday(),
-    //   firstIn: '',
-    //   lastOut: '',
-    //   actualWorkTime: ''
-    // }
+  selectedStatus: string = 'All Status';
+  status: string[] = [
+    'All Status',
+    'Present',
+    'Absent',
+    // 'Leave',
+    // 'WFH'
   ];
+
+  dataSource: any[] = [];
 
   constructor(
     private attendanceService: AttendanceService
   ) { }
   
   ngOnInit(): void {
-    this.loadAttendance();
+    this.loadAttendance(0,5);
   }
 
   checkIn(): void {
@@ -50,7 +54,7 @@ export class AttendanceMgmtComponent implements OnInit{
             alert(res?.message);
             return;
           }
-          this.loadAttendance();
+          this.loadAttendance(0,5);
         },
   
         error: (err) => {
@@ -75,7 +79,7 @@ export class AttendanceMgmtComponent implements OnInit{
         alert(res?.message);
         return;
       }
-      this.loadAttendance();
+      this.loadAttendance(0,5);
     },
 
     error: (err) => {
@@ -140,58 +144,80 @@ export class AttendanceMgmtComponent implements OnInit{
   }
 
   onPageChange(event: any): void {
-    this.pageSize = event.pageSize;
-    this.pageIndex = event.pageIndex;
+    const offset =
+      event.pageIndex * event.pageSize;
   
-    this.loadAttendance();
+    const limit =
+      event.pageSize;
+  
+    this.loadAttendance(offset, limit);
   }
 
-  loadAttendance(): void {
+  loadAttendance(offset: number, limit: number): void {
     const employeeId = localStorage.getItem('employeeId');
   
     if (!employeeId) return;
   
-    const offset =
-      this.pageIndex * this.pageSize;
-  
-    this.attendanceService.getAttendance(employeeId, this.pageSize, offset)
+    this.attendanceService.getAttendance(employeeId, limit, offset)
       .subscribe(res => {
 
-        this.totalRecords = res.count || res.data.length;
+        this.totalRecords = res.data.length;
   
-        this.dataSource = res.data.map((item: any, index: number) => ({
+        const rows = res.data.map((item: any, index: number) => ({
+              
               slNo: offset + index + 1,
   
               date: this.formatDate(item.date),
   
-              firstIn: item.in_time ? this.formatTime(item.in_time) : 'NA',
+              firstIn: item.in_time ? this.formatTime(item.in_time) : '',
   
-              lastOut: item.out_time ? this.formatTime(item.out_time) : 'NA',
+              lastOut: item.out_time ? this.formatTime(item.out_time) : '',
   
-              actualWorkTime: item.in_time && item.out_time ? this.calculateWorkTime(item.in_time, item.out_time) : 'NA',
+              actualWorkTime: item.in_time && item.out_time ? this.calculateWorkTime(item.in_time, item.out_time) : '',
   
-              status: item.status === 1 ? 'Present' : 'Absent'
+              status: item.status === 1 ? 'Present' : item.status === 2 ? 'Leave' : item.status === 3 ? 'WFH' : 'Absent'
             })
-          );
-  
+        );
+        
+        this.totalPresent = res.data.filter((row: any) => row.status === 1).length;
+        this.totalAbsent = res.data.filter((row: any) => row.status === 0).length;
+        // this.totalLeave = res.data.filter((row: any) => row.status === 2).length;
+        // this.totalWFH = res.data.filter((row: any) => row.status === 3).length;
+
+        this.allAttendance = rows;
+        this.dataSource = rows;
         this.addTodayRow();
       });
   }
 
   addTodayRow(): void {
-    const today = new Date().toISOString().split('T')[0];
+    const today = this.getToday();
   
-    const exists = this.dataSource.some(x => x.date.includes(today.split('-')[2]));
+    const exists =
+      this.dataSource.some(row => row.date === today);
   
     if (!exists) {
       this.dataSource.unshift({
         slNo: 1,
-        date: this.getToday(),
+        date: today,
         firstIn: '',
         lastOut: '',
         actualWorkTime: 'NA',
         status: 'Absent'
       });
+  
+      this.totalRecords++;
     }
   }
+
+  onStatusChange(): void{
+    if (this.selectedStatus === 'All Status') this.dataSource = this.allAttendance; 
+    else this.dataSource = this.allAttendance.filter(row => row.status === this.selectedStatus);
+    this.totalRecords = this.dataSource.length;
+  }
+
+  // isWeekend(date: string): boolean{
+  //   const day = new Date(date).getDay();
+  //   return day === 0 || day === 6;
+  // }
 }

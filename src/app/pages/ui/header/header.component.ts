@@ -4,6 +4,7 @@ import {
   HostListener
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { SessionService } from 'src/app/core/services/session.service';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,10 @@ export class HeaderComponent {
 
   showPopup = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private session: SessionService
+  ) { }
 
   togglePopup(event: MouseEvent): void {
     event.stopPropagation();
@@ -28,14 +32,6 @@ export class HeaderComponent {
   }
 
   logout(): void {
-    localStorage.clear();
-
-    document.cookie.split(';').forEach(cookie => {
-      document.cookie =
-        cookie.split('=')[0].trim() +
-        '=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/';
-    });
-
-    this.router.navigate(['/login']);
+    this.session.logout();
   }
 }

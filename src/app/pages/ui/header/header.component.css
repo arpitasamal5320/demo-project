@@ -11,6 +11,7 @@
   top:0;
   left:0;
   right:0;
+  z-index: 1000;
 }
 
 .header-title {
@@ -29,6 +30,7 @@
   font-size: 0.75rem;
   font-weight: 700;
   background: rgba(255, 255, 255, 0.12);
+  cursor: pointer;;
 }
 
 .profile-wrapper {
@@ -37,7 +39,7 @@
 
 .profile-popup {
   position: absolute;
-  top: 45px;
+  top: 60px;
   right: 0;
   width: 140px;
   background: white;
