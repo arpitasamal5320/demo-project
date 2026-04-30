@@ -57,7 +57,7 @@ export class LoginComponent {
         next: (res: AuthResponse) => {
           if (res?.message === 'success') {
             const token = res?.token?.token;
-
+            
             if (token) {
               localStorage.setItem('authToken', token);
 

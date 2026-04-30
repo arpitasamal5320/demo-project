@@ -8,15 +8,19 @@ import { environment } from 'src/environments/environment';
 })
 export class AttendanceService {
 
-  private baseUrl = `${environment.apiUrl}/employeeservice`;
+  private baseUrl = `${environment.apiUrl}`;
 
   constructor(private http: HttpClient) {}
 
   checkIn(id: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/check-in/${id}`,{});
+    return this.http.post(`${this.baseUrl}employeeservice/check-in/${id}`,{});
   }
 
   checkOut(id: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/check-out/${id}`,{});
+    return this.http.post(`${this.baseUrl}employeeservice/check-out/${id}`,{});
+  }
+
+  getAttendance(id: string, limit: number, offset: number): Observable<any>{
+    return this.http.get(`${this.baseUrl}/employeeservice/attendance/${id}?limit=${limit}&offset=${offset}`);
   }
 }
