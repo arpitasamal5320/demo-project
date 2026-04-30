@@ -1,35 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { EmployeeService } from 'src/app/core/services/employee.service';
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.css'] // ✅ added here
+  styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent implements OnInit {
 
   editForm!: FormGroup;
-  employeeId!: string;
   message = '';
+  userId!: string;
 
   constructor(
     private fb: FormBuilder,
-    private employeeService: EmployeeService,
-    private route: ActivatedRoute,
-    private router: Router
+    private empService: EmployeeService
   ) {}
 
   ngOnInit(): void {
-    this.employeeId = this.route.snapshot.paramMap.get('id') || '';
     this.initForm();
 
-    if (this.employeeId) {
-      this.loadEmployee(this.employeeId);
+    this.userId = localStorage.getItem('userId') || '';
+
+    if (!this.userId) {
+      this.message = 'Employee ID not found';
+      return;
     }
+
+    this.loadEmployeeData();
   }
 
+  // ---------------- FORM ----------------
   initForm() {
     this.editForm = this.fb.group({
       employee: this.fb.group({
@@ -46,42 +48,103 @@ export class EditProfileComponent implements OnInit {
         country: [''],
         pincode: [''],
         emergency_contact: [''],
-        aadhar_no: ['']
+        marital_status: [''],
+        aadhar_no: [''],
+        father_name: [''],
+        mother_name: ['']
       }),
       jobDetails: this.fb.group({
         designation: [''],
         department: [''],
-        salary: [0],
+        employee_type: [''],
+        salary: [''],
         joining_date: [''],
-        experience_duration: [0],
-        skills: ['']
+        experience_duration: [''],
+        skills: [''],
+        prev_org: ['']
       })
     });
   }
 
-  loadEmployee(id: string) {
-    this.employeeService.getEmployeeById(id).subscribe({
+  // ---------------- LOAD DATA ----------------
+  loadEmployeeData() {
+    this.empService.getEmployeeById(this.userId).subscribe({
       next: (res: any) => {
-        this.editForm.patchValue(res.data || res);
-      },
-      error: () => {
-        this.message = 'Failed to load employee data';
+
+        const data = res.data;
+
+        // update correct ID from backend
+        this.userId = data.employee.id;
+
+        this.editForm.patchValue({
+          employee: {
+            ...data.employee,
+            date_of_birth: this.formatDate(data.employee.date_of_birth)
+          },
+          employeeDetails: data.employeeDetails,
+          jobDetails: {
+            ...data.jobDetails,
+            joining_date: this.formatDate(data.jobDetails.joining_date),
+
+            // array → string for UI
+            skills: data.jobDetails.skills?.join(', '),
+
+            prev_org: data.jobDetails.prev_org
+              ?.map((x: any) => x.company)
+              .join(', ')
+          }
+        });
       }
     });
   }
 
+  // ---------------- DATE FORMAT ----------------
+  formatDate(date: string) {
+    return date ? date.split('T')[0] : '';
+  }
+
+  // ---------------- UPDATE ----------------
   onUpdate() {
-    if (this.editForm.invalid) return;
 
-    const payload = this.editForm.value;
+    const form = this.editForm.value;
 
-    this.employeeService.updateEmployee(this.employeeId, payload).subscribe({
+    // ✅ FINAL STRUCTURE EXACTLY MATCHING BACKEND
+    const payload = {
+      employee: {
+        ...form.employee
+      },
+
+      employeeDetails: {
+        ...form.employeeDetails
+      },
+
+      jobDetails: {
+        ...form.jobDetails,
+
+        // string → array
+        skills: form.jobDetails.skills
+          ? form.jobDetails.skills.split(',').map((s: string) => s.trim())
+          : [],
+
+        prev_org: form.jobDetails.prev_org
+          ? form.jobDetails.prev_org.split(',').map((c: string) => ({
+              company: c.trim(),
+              years: 0
+            }))
+          : []
+      }
+    };
+
+    console.log("FINAL PAYLOAD →", payload);
+
+    this.empService.updateEmployee(this.userId, payload).subscribe({
       next: () => {
         this.message = 'Profile updated successfully';
-        this.router.navigate(['/employee']);
+        this.loadEmployeeData();
       },
-      error: () => {
-        this.message = 'Update failed';
+      error: (err) => {
+        console.error(err);
+        this.message = err.error?.message || 'Update failed';
       }
     });
   }

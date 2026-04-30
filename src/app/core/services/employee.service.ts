@@ -22,15 +22,11 @@ export class EmployeeService {
     return this.http.post(this.empRegisterUrl, payload);
   }
 
-  // ✅ NEW: UPDATE EMPLOYEE API
   updateEmployee(id: string, payload: any): Observable<any> {
-    const token = localStorage.getItem('authToken') || '';
-
-    const headers = new HttpHeaders({
-      Authorization: token.startsWith('Bearer') ? token : `Bearer ${token}`
-    });
-
-    return this.http.put(`${this.empUpdateUrl}/${id}`, payload, { headers });
+    let result = this.http.put(`${this.empUpdateUrl}/${id}`, payload);
+    if (!result) console.log("result not found")
+    console.log(`This is result ${JSON.stringify(result)}`);
+    return result;
   }
 
   // optional: GET SINGLE EMPLOYEE (for edit page)

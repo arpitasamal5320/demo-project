@@ -15,7 +15,11 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
-  { path: 'emp-basic-regis', component:EmpBasicDetailsComponent,canActivate:[AuthGuard]},
+  { 
+    path: 'emp-basic-regis', 
+    component:EmpBasicDetailsComponent,
+    // canActivate:[AuthGuard]
+    },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'dashboard', component: DashboardComponent},
   { path: 'employees-detail', component:EmployeesDetailsComponent},
@@ -33,24 +37,6 @@ const routes: Routes = [
     component: DashboardComponent,
     // canActivate: [AuthGuard]
   },
-<<<<<<< HEAD
-  { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  {
-    path: 'employees-details',
-    component: EmployeesDetailsComponent
-    
-  },
-  {
-    path: 'edit-profile',
-    component: EditProfileComponent
-   
-  },
-  {
-    path: 'attendance-mgmt',
-    component: AttendanceMgmtComponent
-    
-=======
   {
     path: 'employees-details',
     component: EmployeesDetailsComponent,
@@ -65,7 +51,6 @@ const routes: Routes = [
     path: 'attendance-mgmt',
     component: AttendanceMgmtComponent,
     // canActivate: [AuthGuard]
->>>>>>> origin/main
   }
 ];
 

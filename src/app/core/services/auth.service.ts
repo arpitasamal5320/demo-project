@@ -9,8 +9,8 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
 
   // ✅ Use ONE source (apiUrl OR authUrl — not both)
-  private loginUrl = `${environment.apiUrl}/login`;
-  private signupUrl = `${environment.apiUrl}/signup`;
+  private loginUrl = `${environment.authUrl}/login`;
+  private signupUrl = `${environment.authUrl}/signup`;
 
  
   private formHeaders = new HttpHeaders({
