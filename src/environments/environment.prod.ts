@@ -2,7 +2,7 @@ export const environment = {
 
   production: false,
 
- authUrl: 'https://metallic-build-swaziland-directive.trycloudflare.com/authservice',
-  apiUrl: 'https://metallic-build-swaziland-directive.trycloudflare.com'
+ authUrl: 'https://stockings-keywords-nextel-aimed.trycloudflare.com/authservice',
+  apiUrl: 'https://stockings-keywords-nextel-aimed.trycloudflare.com'
 
 };
