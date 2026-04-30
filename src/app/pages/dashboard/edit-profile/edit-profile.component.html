@@ -1,16 +1,5 @@
 <div class="dashboard-page">
   <app-header [title]="'Employees Details'"></app-header>
-<<<<<<< HEAD
-
-  <div class="dashboard-body">
-    <app-sidebar></app-sidebar>
-
-    <section class="content">
-      <div class="content-panel">
-
-        <div class="page-shell employee-page">
-
-=======
  
   <div class="dashboard-body">
     <app-sidebar></app-sidebar>
@@ -20,76 +9,45 @@
  
         <div class="page-shell employee-page">
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
           <div class="form-header">
             <p class="form-eyebrow">Employee Profile</p>
             <h2>Edit Profile</h2>
             <p class="feedback" *ngIf="message">{{ message }}</p>
           </div>
-<<<<<<< HEAD
-
-          <div class="container employee-container">
-
-            <form class="employee-form" [formGroup]="editForm" (ngSubmit)="onUpdate()">
-
-=======
  
           <div class="container employee-container">
  
             <form class="employee-form" [formGroup]="editForm" (ngSubmit)="onUpdate()">
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
               <!-- SECTION 1 -->
               <section class="section-card" formGroupName="employee">
                 <div class="section-heading">
                   <p class="section-index">Section 01</p>
                   <h3>Employee Details</h3>
                 </div>
-<<<<<<< HEAD
-
-                <div class="field-grid">
-
-=======
  
                 <div class="field-grid">
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="first-name">First Name</label>
                     <input id="first-name" formControlName="first_name" />
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="last-name">Last Name</label>
                     <input id="last-name" formControlName="last_name" />
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="phone">Phone</label>
                     <input id="phone" type="tel" formControlName="phone" />
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="dob">Date of Birth</label>
                     <input id="dob" type="date" formControlName="date_of_birth" />
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="gender">Gender</label>
                     <select id="gender" formControlName="gender">
@@ -99,86 +57,49 @@
                       <option value="OTHER">OTHER</option>
                     </select>
                   </div>
-<<<<<<< HEAD
-
-                </div>
-              </section>
-
-=======
  
                 </div>
               </section>
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
               <!-- SECTION 2 -->
               <section class="section-card" formGroupName="employeeDetails">
                 <div class="section-heading">
                   <p class="section-index">Section 02</p>
                   <h3>Personal Details</h3>
                 </div>
-<<<<<<< HEAD
-
-                <div class="field-grid">
-
-=======
  
                 <div class="field-grid">
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--12">
                     <label for="address">Address</label>
                     <textarea id="address" formControlName="address"></textarea>
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="city">City</label>
                     <input id="city" formControlName="city" />
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="state">State</label>
                     <input id="state" formControlName="state" />
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="country">Country</label>
                     <input id="country" formControlName="country" />
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="pincode">Pincode</label>
                     <input id="pincode" formControlName="pincode" />
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="emergency">Emergency Contact</label>
                     <input id="emergency" formControlName="emergency_contact" />
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="marital">Marital Status</label>
                     <select id="marital" formControlName="marital_status">
@@ -187,68 +108,39 @@
                       <option value="MARRIED">MARRIED</option>
                     </select>
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="aadhar">Aadhar Number</label>
                     <input id="aadhar" formControlName="aadhar_no" />
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="father">Father Name</label>
                     <input id="father" formControlName="father_name" />
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="mother">Mother Name</label>
                     <input id="mother" formControlName="mother_name" />
                   </div>
-<<<<<<< HEAD
-
-                </div>
-              </section>
-
-=======
  
                 </div>
               </section>
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
               <!-- SECTION 3 -->
               <section class="section-card" formGroupName="jobDetails">
                 <div class="section-heading">
                   <p class="section-index">Section 03</p>
                   <h3>Job Details</h3>
                 </div>
-<<<<<<< HEAD
-
-                <div class="field-grid">
-
-=======
  
                 <div class="field-grid">
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="designation">Designation</label>
                     <input id="designation" formControlName="designation" />
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="department">Department</label>
                     <select id="department" formControlName="department">
@@ -261,11 +153,7 @@
                       <option value="IOSDEV">IOSDEV</option>
                     </select>
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="type">Employee Type</label>
                     <select id="type" formControlName="employee_type">
@@ -275,65 +163,31 @@
                       <option value="INTERN">INTERN</option>
                     </select>
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="salary">Salary</label>
                     <input id="salary" type="number" formControlName="salary" />
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="joining">Joining Date</label>
                     <input id="joining" type="date" formControlName="joining_date" />
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--4">
                     <label for="exp">Experience Duration</label>
                     <input id="exp" type="number" formControlName="experience_duration" />
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--12">
                     <label for="skills">Skills</label>
                     <textarea id="skills" formControlName="skills"></textarea>
                   </div>
-<<<<<<< HEAD
-
-=======
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
                   <div class="field field--12">
                     <label for="prev">Previous Org</label>
                     <textarea id="prev" formControlName="prev_org"></textarea>
                   </div>
-<<<<<<< HEAD
-
-                </div>
-              </section>
-
-              <div class="form-actions">
-                <button type="submit">Update Profile</button>
-              </div>
-
-            </form>
-          </div>
-        </div>
-
-=======
  
                 </div>
               </section>
@@ -346,7 +200,6 @@
           </div>
         </div>
  
->>>>>>> 332a3023466cb03445ef25d72808d230e2eb9ca9
       </div>
     </section>
   </div>
