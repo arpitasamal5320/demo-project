@@ -10,7 +10,7 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { EmployeesDetailsComponent } from './pages/dashboard/employees-details/employees-details.component';
 import { EditProfileComponent } from './pages/dashboard/edit-profile/edit-profile.component';
 import { AttendanceMgmtComponent } from './pages/dashboard/attendance-mgmt/attendance-mgmt.component';
-
+import { LeaveMgmtComponent } from './pages/dashboard/leave-mgmt/leave-mgmt.component';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -50,6 +50,11 @@ const routes: Routes = [
   {
     path: 'attendance-mgmt',
     component: AttendanceMgmtComponent,
+    // canActivate: [AuthGuard]
+  },
+   {
+    path: 'leave-mgmt',
+    component: LeaveMgmtComponent,
     // canActivate: [AuthGuard]
   }
 ];

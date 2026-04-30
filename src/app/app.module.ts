@@ -22,6 +22,7 @@ import { AttendanceMgmtComponent } from './pages/dashboard/attendance-mgmt/atten
 import { HeaderComponent } from './pages/ui/header/header.component';
 import { SidebarComponent } from './pages/ui/sidebar/sidebar.component';
 import { MatTableModule } from '@angular/material/table';
+import { LeaveMgmtComponent } from './pages/dashboard/leave-mgmt/leave-mgmt.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +35,8 @@ import { MatTableModule } from '@angular/material/table';
     EditProfileComponent,
     AttendanceMgmtComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    LeaveMgmtComponent
   ],
   imports: [
     BrowserModule,
