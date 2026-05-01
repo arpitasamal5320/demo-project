@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatTableModule } from '@angular/material/table';
+
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 
@@ -25,6 +25,8 @@ import { SidebarComponent } from './pages/ui/sidebar/sidebar.component';
 import { LeaveMgmtComponent } from './pages/dashboard/leave-mgmt/leave-mgmt.component';
 import { NotificationComponent } from './pages/notification/notification.component';
 
+import { MatTableModule } from '@angular/material/table';
+import { HRPortalComponent } from './pages/dashboard/hr-portal/hr-portal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +42,7 @@ import { NotificationComponent } from './pages/notification/notification.compone
     SidebarComponent,
     LeaveMgmtComponent,
     NotificationComponent,
+    HRPortalComponent
   ],
   imports: [
     BrowserModule,

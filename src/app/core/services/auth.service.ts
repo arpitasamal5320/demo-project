@@ -10,6 +10,7 @@ export class AuthService {
 
   private loginUrl = `${environment.authUrl}/login`;
   private signupUrl = `${environment.authUrl}/signup`;
+
   private formHeaders = new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded'
   });

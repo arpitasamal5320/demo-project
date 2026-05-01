@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EmployeeService } from 'src/app/core/services/employee.service';
+
 import { AadharValidator } from 'src/app/core/validators/aadhar.validator';
 import { PhoneValidator } from 'src/app/core/validators/phone.validator';
 import { SalaryValidator } from 'src/app/core/validators/salary.validator';
@@ -24,7 +25,6 @@ export class EmpBasicDetailsComponent {
 
     this.empForm = this.fb.group({
 
-      // employee details
       employee: this.fb.group({
         first_name: ['', Validators.required],
         last_name: ['', Validators.required],
@@ -33,7 +33,6 @@ export class EmpBasicDetailsComponent {
         gender: ['', Validators.required],
       }),
 
-      // employee's personal details
       employeeDetails: this.fb.group({
         address: ['', Validators.required],
         city: ['', Validators.required],
@@ -47,7 +46,6 @@ export class EmpBasicDetailsComponent {
         mother_name: ['', Validators.required],
       }),
 
-      // job details
       jobDetails: this.fb.group({
         designation: ['', Validators.required],
         department: ['', Validators.required],
@@ -55,6 +53,7 @@ export class EmpBasicDetailsComponent {
         joining_date: ['', Validators.required],
         employee_type: ['', Validators.required],
         status: ['ACTIVE'],
+
         skills: [''],
         prev_org: [''],
         experience_duration: ['', Validators.required]
@@ -65,8 +64,6 @@ export class EmpBasicDetailsComponent {
 
   onSubmit() {
 
-    console.log('SUBMIT CLICKED');
-
     this.empForm.markAllAsTouched();
 
     if (this.empForm.invalid) {
@@ -76,29 +73,47 @@ export class EmpBasicDetailsComponent {
 
     const formValue = this.empForm.value;
 
-    // conversion of comma separated values into array
+    // ✅ FINAL PAYLOAD (CLEAN)
     const payload = {
-      ...formValue,
+      employee: formValue.employee,
+      employeeDetails: formValue.employeeDetails,
+
       jobDetails: {
-        ...formValue.jobDetails,
+        designation: formValue.jobDetails.designation,
+        department: formValue.jobDetails.department,
+        salary: Number(formValue.jobDetails.salary),
+        joining_date: formValue.jobDetails.joining_date,
+        employee_type: formValue.jobDetails.employee_type,
+        status: formValue.jobDetails.status,
+
+        past_experience: !!formValue.jobDetails.prev_org,
+
+        // string → array of objects
+        prev_org: formValue.jobDetails.prev_org
+          ? formValue.jobDetails.prev_org.split(',').map((x: string) => ({
+              company: x.trim(),
+              years: 0
+            }))
+          : [],
+
+        // string → array
         skills: formValue.jobDetails.skills
           ? formValue.jobDetails.skills.split(',').map((x: string) => x.trim())
           : [],
 
-        prev_org: formValue.jobDetails.prev_org
-          ? formValue.jobDetails.prev_org.split(',').map((x: string) => x.trim())
-          : []
+        experience_duration: Number(formValue.jobDetails.experience_duration)
       }
     };
 
+    const token = localStorage.getItem('authToken') || '';
+
     console.log('FINAL PAYLOAD:', payload);
 
+    // ✅ SINGLE API CALL ONLY (FIXED)
     this.employeeService.registerEmployee(payload).subscribe({
       next: (res: any) => {
-        console.log('================ SUCCESS RESPONSE ================');
-        console.log('Response:', res);
-        console.log('Message:', res?.message);
-        console.log('Full Response:', JSON.stringify(res, null, 2));
+
+        console.log('SUCCESS RESPONSE:', res);
 
         this.message = res?.message || 'Employee registered successfully';
 
@@ -112,10 +127,8 @@ export class EmpBasicDetailsComponent {
       },
 
       error: (err) => {
-        console.log('================ ERROR RESPONSE ================');
-        console.log('Status:', err.status);
-        console.log('Error Body:', err.error);
-        console.log('Backend Message:', err.error?.message);
+
+        console.log('ERROR RESPONSE:', err);
 
         if (err.status === 409) {
           this.message = 'Employee already exists (duplicate entry)';

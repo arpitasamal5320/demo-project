@@ -15,7 +15,7 @@ interface AuthResponse {
     token?: string;
   };
 }
-
+ 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -23,10 +23,10 @@ interface AuthResponse {
 })
 export class LoginComponent {
   loginForm: FormGroup;
-
+ 
   feedbackMessage = '';
   isSubmitting = false;
-
+ 
   constructor(
     private auth: AuthService,
     private router: Router,
@@ -40,18 +40,18 @@ export class LoginComponent {
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
-
+ 
   onLogin(): void {
     if (this.loginForm.invalid || this.isSubmitting) {
       this.loginForm.markAllAsTouched();
       this.notify.showWarning('Warning', 'Please complete the form correctly.');
       return;
     }
-
+ 
     const { email, password } = this.loginForm.value;
     this.feedbackMessage = '';
     this.isSubmitting = true;
-
+ 
     this.auth.login(email, password)
       .pipe(
         finalize(() => {
@@ -85,7 +85,7 @@ export class LoginComponent {
                   this.notify.showError(err);
                 }
               });
-
+ 
               return;
             }
 

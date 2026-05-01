@@ -1,4 +1,5 @@
 <div class="dashboard-page">
+<<<<<<< HEAD
     <app-header [title]="'Leave Management'"></app-header>
    
     <div class="dashboard-body">
@@ -101,3 +102,106 @@
       </section>
     </div>
   </div>
+=======
+  <app-header [title]="'Leave Management'"></app-header>
+
+  <div class="dashboard-body">
+    <app-sidebar></app-sidebar>
+
+    <section class="content">
+      <div class="content-panel">
+
+        <!-- Apply Leave -->
+        <div class="card mb-4 p-3">
+          <h5 class="mb-3">Apply Leave</h5>
+
+          <form [formGroup]="leaveForm" (ngSubmit)="onSubmit()">
+            <div class="row g-3">
+
+              <div class="col-md-4">
+                <label>From Date</label>
+                <input type="date" class="form-control" formControlName="from_date">
+              </div>
+
+              <div class="col-md-4">
+                <label>To Date</label>
+                <input type="date" class="form-control" formControlName="to_date">
+              </div>
+
+              <div class="col-md-4">
+                <label>Reason</label>
+                <input type="text" class="form-control" formControlName="reason">
+              </div>
+
+              <div class="col-md-12">
+                <button class="btn btn-primary btn-sm mt-2">
+                  Apply Leave
+                </button>
+              </div>
+
+            </div>
+          </form>
+        </div>
+
+        <!-- Leave Table -->
+        <div class="table-responsive border rounded">
+          <table mat-table [dataSource]="dataSource" class="w-100">
+
+            <!-- SL -->
+            <ng-container matColumnDef="slNo">
+              <th mat-header-cell *matHeaderCellDef>Sl</th>
+              <td mat-cell *matCellDef="let el; let i = index">{{ i + 1 }}</td>
+            </ng-container>
+
+            <!-- FROM -->
+            <ng-container matColumnDef="from_date">
+              <th mat-header-cell *matHeaderCellDef>From</th>
+              <td mat-cell *matCellDef="let el">
+                {{ el.from_date | date:'dd-MM-yyyy' }}
+              </td>
+            </ng-container>
+
+            <!-- TO -->
+            <ng-container matColumnDef="to_date">
+              <th mat-header-cell *matHeaderCellDef>To</th>
+              <td mat-cell *matCellDef="let el">
+                {{ el.to_date | date:'dd-MM-yyyy' }}
+              </td>
+            </ng-container>
+
+            <!-- REASON -->
+            <ng-container matColumnDef="reason">
+              <th mat-header-cell *matHeaderCellDef>Reason</th>
+              <td mat-cell *matCellDef="let el">
+                {{ el.reason }}
+              </td>
+            </ng-container>
+
+            <!-- STATUS -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let el">
+                <span
+                  [ngClass]="{
+                    'text-warning': el.status === 'PENDING',
+                    'text-success': el.status === 'APPROVED',
+                    'text-danger': el.status === 'REJECTED'
+                  }">
+                  {{ el.status }}
+                </span>
+              </td>
+            </ng-container>
+
+            <!-- ❌ ACTION COLUMN REMOVED -->
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+          </table>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</div>
+>>>>>>> 78cbbc7d1928075200a0a3617758dc7d9ebb3ad3

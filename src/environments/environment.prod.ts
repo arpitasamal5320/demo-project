@@ -1,5 +1,8 @@
 export const environment = {
-  production: true,
-  authUrl: 'https://aruba-view-airlines-integration.trycloudflare.com/authservice',
-  apiUrl: 'https://aruba-view-airlines-integration.trycloudflare.com'
+
+  production: false,
+
+ authUrl: 'https://exception-strengthening-parental-voluntary.trycloudflare.com/authservice',
+  apiUrl: 'https://exception-strengthening-parental-voluntary.trycloudflare.com'
+
 };

@@ -9,6 +9,7 @@ import { EmployeeService } from 'src/app/core/services/employee.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { Chart } from 'chart.js/auto';
 
 @Component({
   selector: 'app-employees-details',
@@ -31,6 +32,7 @@ export class EmployeesDetailsComponent implements OnInit, AfterViewInit {
   currentColumn = '';
   startX = 0;
   startWidth = 0;
+  chart:any;
 
   displayedColumns: string[] = [
     'sl_no',
@@ -68,6 +70,8 @@ export class EmployeesDetailsComponent implements OnInit, AfterViewInit {
     if (saved) this.columnWidths = JSON.parse(saved);
 
     this.loadEmployees(0, 5);
+     this.loadChartData();
+    
   }
 
   ngAfterViewInit(): void {
@@ -136,4 +140,48 @@ export class EmployeesDetailsComponent implements OnInit, AfterViewInit {
     document.removeEventListener('mousemove', this.resizeColumn);
     document.removeEventListener('mouseup', this.stopResize);
   }
+
+loadChartData(): void {
+  this.employeeService.getAllEmployees().subscribe((result: any) => {
+
+    const employees = result.data || [];
+    const deptCount: any = {};
+
+    employees.forEach((emp: any) => {
+  const dept = emp?.jobDetails?.department;
+
+  // ✅ FILTER departments here
+  if (dept === 'IT' || dept === 'AI' || dept === 'WEBDEV'|| dept === 'BUSINESS'||dept === 'IOSDEV'||dept === 'IT'|| dept === 'MOBILEDEV') {
+    deptCount[dept] = (deptCount[dept] || 0) + 1;
+  }
+});
+    const labels = Object.keys(deptCount);
+    const values = Object.values(deptCount) as number[];
+
+    this.renderChart(labels, values);
+  });
+}
+
+renderChart(labels: string[], data: number[]): void {
+  if (this.chart) {
+    this.chart.destroy();
+  }
+
+  this.chart = new Chart('deptChart', {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: 'Employees per Department',
+          data: data
+        }
+      ]
+    },
+    options: {
+      responsive: true
+    }
+  });
+}
+
 }

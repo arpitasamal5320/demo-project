@@ -12,7 +12,11 @@
   top:0;
   left:0;
   right:0;
+<<<<<<< HEAD
   z-index: 1000;
+=======
+  z-index :1000;
+>>>>>>> 78cbbc7d1928075200a0a3617758dc7d9ebb3ad3
 }
 
 .header-title {

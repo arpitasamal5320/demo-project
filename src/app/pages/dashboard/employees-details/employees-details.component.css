@@ -57,3 +57,14 @@ th.mat-header-cell {
   -webkit-user-select: none;
   user-select: none;
 }
+.chart-container {
+  width: 100%;          /* full width */
+  max-width: 600px;     /* limit max size */
+  height: 300px;        /* fixed height */
+  margin: 0 auto;       /* center */
+}
+
+.chart-container canvas {
+  width: 100% !important;
+  height: 100% !important;
+}

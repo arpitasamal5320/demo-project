@@ -11,11 +11,20 @@ import { EmployeesDetailsComponent } from './pages/dashboard/employees-details/e
 import { EditProfileComponent } from './pages/dashboard/edit-profile/edit-profile.component';
 import { AttendanceMgmtComponent } from './pages/dashboard/attendance-mgmt/attendance-mgmt.component';
 import { LeaveMgmtComponent } from './pages/dashboard/leave-mgmt/leave-mgmt.component';
+import { HRPortalComponent } from './pages/dashboard/hr-portal/hr-portal.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
+  { 
+    path: 'emp-basic-regis', 
+    component:EmpBasicDetailsComponent,
+    // canActivate:[AuthGuard]
+    },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'dashboard', component: DashboardComponent},
+  { path: 'employees-detail', component:EmployeesDetailsComponent},
   {
     path: 'emp-basic-regis',
     component: EmpBasicDetailsComponent,
@@ -45,10 +54,15 @@ const routes: Routes = [
     component: AttendanceMgmtComponent,
     canActivate: [AuthGuard]
   },
-  {
+   {
     path: 'leave-mgmt',
     component: LeaveMgmtComponent,
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
+  },
+  {
+    path: 'hr-portal',
+    component: HRPortalComponent,
+    // canActivate: [AuthGuard]
   }
 ];
 
