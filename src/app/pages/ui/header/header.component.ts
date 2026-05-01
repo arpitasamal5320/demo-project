@@ -1,10 +1,6 @@
-import {
-  Component,
-  Input,
-  HostListener
-} from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, Input, HostListener } from '@angular/core';
 import { SessionService } from 'src/app/core/services/session.service';
+import { SidebarStateService } from '../sidebar/sidebar-state.service';
 
 @Component({
   selector: 'app-header',
@@ -17,13 +13,18 @@ export class HeaderComponent {
   showPopup = false;
 
   constructor(
-    private router: Router,
-    private session: SessionService
-  ) { }
+    private session: SessionService,
+    public sidebarState: SidebarStateService
+  ) {}
 
   togglePopup(event: MouseEvent): void {
     event.stopPropagation();
     this.showPopup = !this.showPopup;
+  }
+
+  toggleMobileSidebar(event: MouseEvent): void {
+    event.stopPropagation();
+    this.sidebarState.toggleMobileSidebar();
   }
 
   @HostListener('document:click')

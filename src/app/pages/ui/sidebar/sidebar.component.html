@@ -1,8 +1,8 @@
-<aside class="sidebar" [class.sidebar-collapsed]="isCollapsed">
+<aside id="appSidebar" class="sidebar" [class.sidebar-collapsed]="sidebarState.isCollapsed" [class.mobile-sidebar-open]="sidebarState.isMobileOpen">
   <div class="sidebar-top">
     <button
       type="button"
-      class="menu-btn"
+      class="menu-btn desktop-menu-btn"
       (click)="toggleSidebar()"
       aria-label="Toggle sidebar"
       title="Toggle sidebar"
@@ -17,23 +17,29 @@
       routerLink="/dashboard"
       routerLinkActive="active"
       class="nav-item"
+      (click)="closeMobileSidebar()"
     >
       <i class="fa-solid fa-house"></i>
       <span class="label">Dashboard</span>
     </a>
 
-    <a routerLink="/employees-details" routerLinkActive="active" class="nav-item">
+    <a routerLink="/employees-details" routerLinkActive="active" class="nav-item" (click)="closeMobileSidebar()">
       <i class="fa-solid fa-users"></i>
       <span class="label">Employees Details</span>
     </a>
 
-    <a routerLink="/edit-profile" routerLinkActive="active" class="nav-item">
+    <a routerLink="/edit-profile" routerLinkActive="active" class="nav-item" (click)="closeMobileSidebar()">
       <i class="fa-solid fa-user-pen"></i>
       <span class="label">Edit Profile</span>
     </a>
 
-    <a routerLink="/attendance-mgmt" routerLinkActive="active" class="nav-item">
+    <a routerLink="/attendance-mgmt" routerLinkActive="active" class="nav-item" (click)="closeMobileSidebar()">
       <i class="fa-solid fa-calendar-check"></i>
+      <span class="label">Attendance Mgmt</span>
+    </a>
+
+    <a routerLink="/leave-mgmt" routerLinkActive="active" class="nav-item" (click)="closeMobileSidebar()">
+      <i class="fa-solid fa-handshake-simple"></i>
       <span class="label">Attendance Mgmt</span>
     </a>
   </nav>

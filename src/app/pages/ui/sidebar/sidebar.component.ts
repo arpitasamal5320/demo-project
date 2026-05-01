@@ -1,33 +1,20 @@
-// src/app/pages/ui/sidebar/sidebar.component.ts
-import { Component, OnInit, Renderer2 } from '@angular/core';
+import { Component } from '@angular/core';
+import { SidebarStateService } from './sidebar-state.service';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
 
-  constructor(private renderer: Renderer2) { }
-  isCollapsed = false;
-  private readonly storageKey = 'emsSidebarCollapsed';
-
-  ngOnInit(): void {
-    this.isCollapsed = localStorage.getItem(this.storageKey) === 'true';
-    this.updateBodyClass();
-  }
+  constructor(public sidebarState: SidebarStateService) {}
 
   toggleSidebar(): void {
-    this.isCollapsed = !this.isCollapsed;
-    localStorage.setItem(this.storageKey, String(this.isCollapsed));
-    this.updateBodyClass();
+    this.sidebarState.toggleDesktopSidebar();
   }
 
-  private updateBodyClass(): void {
-    if (this.isCollapsed) {
-      this.renderer.addClass(document.body,'sidebar-collapsed');
-    } else {
-      this.renderer.removeClass(document.body,'sidebar-collapsed');
-    }
+  closeMobileSidebar(): void {
+    this.sidebarState.closeMobileSidebar();
   }
 }

@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  authUrl: 'https://struck-suites-strike-present.trycloudflare.com/authservice',
-  apiUrl: 'https://struck-suites-strike-present.trycloudflare.com'
+  authUrl: 'https://destinations-ensemble-roster-accepted.trycloudflare.com/authservice',
+  apiUrl: 'https://destinations-ensemble-roster-accepted.trycloudflare.com'
 };

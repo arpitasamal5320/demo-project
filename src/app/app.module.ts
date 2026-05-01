@@ -22,6 +22,7 @@ import { EditProfileComponent } from './pages/dashboard/edit-profile/edit-profil
 import { AttendanceMgmtComponent } from './pages/dashboard/attendance-mgmt/attendance-mgmt.component';
 import { HeaderComponent } from './pages/ui/header/header.component';
 import { SidebarComponent } from './pages/ui/sidebar/sidebar.component';
+import { LeaveMgmtComponent } from './pages/dashboard/leave-mgmt/leave-mgmt.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { SidebarComponent } from './pages/ui/sidebar/sidebar.component';
     EditProfileComponent,
     AttendanceMgmtComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    LeaveMgmtComponent,
   ],
   imports: [
     BrowserModule,

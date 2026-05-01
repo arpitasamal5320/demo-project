@@ -49,8 +49,26 @@ body.sidebar-collapsed .dashboard-page .content {
 }
 
 @media (max-width: 900px) {
+	.dashboard-page {
+		--mobile-sidebar-height: 232px;
+	}
+
+	.dashboard-page .dashboard-body {
+		display: block;
+	}
+
 	.dashboard-page .content {
+		margin-left: 0;
 		padding: 16px;
+		transition: margin-top 0.28s ease;
+	}
+
+	body.sidebar-collapsed .dashboard-page .content {
+		margin-left: 0;
+	}
+
+	body.mobile-sidebar-open .dashboard-page .content {
+		margin-top: var(--mobile-sidebar-height);
 	}
 
 	.dashboard-page .content-panel {
