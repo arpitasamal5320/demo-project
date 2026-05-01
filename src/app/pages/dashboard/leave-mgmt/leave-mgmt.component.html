@@ -7,7 +7,7 @@
     <section class="content">
       <div class="content-panel">
 
-        <!-- Apply Leave Form -->
+        <!-- Apply Leave -->
         <div class="card mb-4 p-3">
           <h5 class="mb-3">Apply Leave</h5>
 
@@ -15,31 +15,24 @@
             <div class="row g-3">
 
               <div class="col-md-4">
-                <label class="form-label">From Date</label>
+                <label>From Date</label>
                 <input type="date" class="form-control" formControlName="from_date">
               </div>
 
               <div class="col-md-4">
-                <label class="form-label">To Date</label>
+                <label>To Date</label>
                 <input type="date" class="form-control" formControlName="to_date">
               </div>
 
               <div class="col-md-4">
-                <label class="form-label">Reason</label>
+                <label>Reason</label>
                 <input type="text" class="form-control" formControlName="reason">
               </div>
 
-              <div class="col-md-4">
-                <label class="form-label">Status</label>
-                <select class="form-select" formControlName="status">
-                  <option value="PENDING">PENDING</option>
-                  <option value="APPROVED">APPROVED</option>
-                  <option value="REJECTED">REJECTED</option>
-                </select>
-              </div>
-
               <div class="col-md-12">
-                <button class="btn btn-primary btn-sm mt-2" type="submit">Apply Leave</button>
+                <button class="btn btn-primary btn-sm mt-2">
+                  Apply Leave
+                </button>
               </div>
 
             </div>
@@ -50,58 +43,55 @@
         <div class="table-responsive border rounded">
           <table mat-table [dataSource]="dataSource" class="w-100">
 
-            <!-- SL NO -->
+            <!-- SL -->
             <ng-container matColumnDef="slNo">
-              <th mat-header-cell *matHeaderCellDef class="text-center">Sl. No</th>
-              <td mat-cell *matCellDef="let element; let i = index" class="text-center">
-                {{ i + 1 }}
-              </td>
+              <th mat-header-cell *matHeaderCellDef>Sl</th>
+              <td mat-cell *matCellDef="let el; let i = index">{{ i + 1 }}</td>
             </ng-container>
 
-            <!-- FROM DATE -->
+            <!-- FROM -->
             <ng-container matColumnDef="from_date">
-              <th mat-header-cell *matHeaderCellDef class="text-center">From Date</th>
-              <td mat-cell *matCellDef="let element" class="text-center">
-                {{ element.from_date | date:'dd-MM-yyyy' }}
+              <th mat-header-cell *matHeaderCellDef>From</th>
+              <td mat-cell *matCellDef="let el">
+                {{ el.from_date | date:'dd-MM-yyyy' }}
               </td>
             </ng-container>
 
-            <!-- TO DATE -->
+            <!-- TO -->
             <ng-container matColumnDef="to_date">
-              <th mat-header-cell *matHeaderCellDef class="text-center">To Date</th>
-              <td mat-cell *matCellDef="let element" class="text-center">
-                {{ element.to_date | date:'dd-MM-yyyy' }}
+              <th mat-header-cell *matHeaderCellDef>To</th>
+              <td mat-cell *matCellDef="let el">
+                {{ el.to_date | date:'dd-MM-yyyy' }}
               </td>
             </ng-container>
 
             <!-- REASON -->
             <ng-container matColumnDef="reason">
-              <th mat-header-cell *matHeaderCellDef class="text-center">Reason</th>
-              <td mat-cell *matCellDef="let element" class="text-center">
-                {{ element.reason }}
+              <th mat-header-cell *matHeaderCellDef>Reason</th>
+              <td mat-cell *matCellDef="let el">
+                {{ el.reason }}
               </td>
             </ng-container>
 
             <!-- STATUS -->
             <ng-container matColumnDef="status">
-              <th mat-header-cell *matHeaderCellDef class="text-center">Status</th>
-              <td mat-cell *matCellDef="let element" class="text-center">
-                <span 
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let el">
+                <span
                   [ngClass]="{
-                    'text-warning': element.status === 'PENDING',
-                    'text-success': element.status === 'APPROVED',
-                    'text-danger': element.status === 'REJECTED'
+                    'text-warning': el.status === 'PENDING',
+                    'text-success': el.status === 'APPROVED',
+                    'text-danger': el.status === 'REJECTED'
                   }">
-                  {{ element.status }}
+                  {{ el.status }}
                 </span>
               </td>
             </ng-container>
 
-        
+            <!-- ❌ ACTION COLUMN REMOVED -->
+
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"
-                [ngClass]="{'table-striped-custom': row.id % 2 === 0}">
-            </tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
           </table>
         </div>

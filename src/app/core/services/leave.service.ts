@@ -14,13 +14,22 @@ export class LeaveService {
 
   constructor(private http: HttpClient) {}
 
-  // ✅ APPLY LEAVE
+  
   applyLeave(empId: string, payload: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/${empId}`, payload);
   }
 
-  // ✅ GET ALL LEAVES BY EMPLOYEE
+  
   getLeavesByEmpId(empId: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/${empId}`);
   }
+getLeavesByStatus(status: 'PENDING' | 'APPROVED' | 'REJECTED'): Observable<any> {
+    return this.http.get(`${this.baseUrl}?status=${status}`);
+  }
+
+  // ✅ UPDATE STATUS USING LEAVE ID (IMPORTANT FIX)
+  updateLeaveStatus(leaveId: string, status: 'APPROVED' | 'REJECTED'): Observable<any> {
+    return this.http.patch(`${this.baseUrl}/${leaveId}`, { status });
+  }
+  
 }

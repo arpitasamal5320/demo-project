@@ -23,6 +23,7 @@ import { HeaderComponent } from './pages/ui/header/header.component';
 import { SidebarComponent } from './pages/ui/sidebar/sidebar.component';
 import { MatTableModule } from '@angular/material/table';
 import { LeaveMgmtComponent } from './pages/dashboard/leave-mgmt/leave-mgmt.component';
+import { HRPortalComponent } from './pages/dashboard/hr-portal/hr-portal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,8 @@ import { LeaveMgmtComponent } from './pages/dashboard/leave-mgmt/leave-mgmt.comp
     AttendanceMgmtComponent,
     HeaderComponent,
     SidebarComponent,
-    LeaveMgmtComponent
+    LeaveMgmtComponent,
+    HRPortalComponent
   ],
   imports: [
     BrowserModule,
