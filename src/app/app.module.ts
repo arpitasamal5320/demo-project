@@ -23,6 +23,7 @@ import { AttendanceMgmtComponent } from './pages/dashboard/attendance-mgmt/atten
 import { HeaderComponent } from './pages/ui/header/header.component';
 import { SidebarComponent } from './pages/ui/sidebar/sidebar.component';
 import { LeaveMgmtComponent } from './pages/dashboard/leave-mgmt/leave-mgmt.component';
+import { NotificationComponent } from './pages/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { LeaveMgmtComponent } from './pages/dashboard/leave-mgmt/leave-mgmt.comp
     HeaderComponent,
     SidebarComponent,
     LeaveMgmtComponent,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,

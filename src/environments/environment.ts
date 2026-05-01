@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
-  authUrl: 'https://destinations-ensemble-roster-accepted.trycloudflare.com/authservice',
-  apiUrl: 'https://destinations-ensemble-roster-accepted.trycloudflare.com'
+  authUrl: 'https://exception-strengthening-parental-voluntary.trycloudflare.com/authservice',
+  apiUrl: 'https://exception-strengthening-parental-voluntary.trycloudflare.com'
 };

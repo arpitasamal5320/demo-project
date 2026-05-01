@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AttendanceService } from 'src/app/core/services/attendance.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
 
 @Component({
   selector: 'app-attendance-mgmt',
@@ -36,7 +37,8 @@ export class AttendanceMgmtComponent implements OnInit{
   dataSource: any[] = [];
 
   constructor(
-    private attendanceService: AttendanceService
+    private attendanceService: AttendanceService,
+    private notify: NotificationService
   ) { }
   
   ngOnInit(): void {
@@ -51,15 +53,14 @@ export class AttendanceMgmtComponent implements OnInit{
       .subscribe({
         next: (res) => {
           if (res?.status === 'fail') {
-            alert(res?.message);
+            this.notify.showMessage('Fail', res?.message);
             return;
           }
           this.loadAttendance(0,5);
         },
   
         error: (err) => {
-          console.log(err);
-          alert(err?.error?.message);
+          this.notify.showError(err);
         }
       });
   }
@@ -69,22 +70,21 @@ export class AttendanceMgmtComponent implements OnInit{
     if (!employeeId) return;
   
     if (!this.dataSource[0]?.firstIn) {
-      alert('Please check in first');
+      this.notify.showWarning('Warning', 'Please check in first');
       return;
     }
     this.attendanceService.checkOut(employeeId)
   .subscribe({
     next: (res) => {
       if (res.status === 'fail') {
-        alert(res?.message);
+        this.notify.showMessage('Fail', res?.message);
         return;
       }
       this.loadAttendance(0,5);
     },
 
     error: (err) => {
-      console.log(err);
-      alert(err?.error?.message);
+      this.notify.showError(err);
     }
   });
   }

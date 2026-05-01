@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { LeaveService } from 'src/app/core/services/leave.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
  
 interface LeaveRequest {
   id: string;
@@ -34,7 +35,8 @@ export class LeaveMgmtComponent implements OnInit {
  
   constructor(
     private fb: FormBuilder,
-    private leaveService: LeaveService
+    private leaveService: LeaveService,
+    private notify: NotificationService
   ) {}
  
   ngOnInit(): void {
@@ -85,8 +87,7 @@ export class LeaveMgmtComponent implements OnInit {
         this.loadLeaves();
       },
       error: (err) => {
-        const message = err?.error?.message || 'Leave overlaps with existing request';
-  alert(message);
+        this.notify.showError(err);
       }
     });
   }

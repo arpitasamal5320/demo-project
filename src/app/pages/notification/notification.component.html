@@ -1,0 +1,27 @@
+<div class="notify-backdrop" *ngIf="notify.visible">
+    <div class="card notify-box shadow-lg">
+  
+        <div
+        class="card-header d-flex justify-content-between align-items-center"
+        [ngClass]="{
+            'bg-danger text-white': notify.type === 'error',
+            'bg-success text-white': notify.type === 'success',
+            'bg-primary text-white': notify.type === 'info',
+            'bg-warning text-dark': notify.type === 'warning'
+        }"
+        >
+        <strong>{{ notify.title }}</strong>
+  
+        <button
+          type="button"
+          [class]="notify.type === 'warning' ? 'btn-close' : 'btn-close btn-close-white'"
+          (click)="notify.close()">
+        </button>
+      </div>
+  
+      <div class="card-body notify-message">
+        {{ notify.message }}
+      </div>
+  
+    </div>
+  </div>

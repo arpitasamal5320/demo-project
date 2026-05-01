@@ -6,6 +6,8 @@ import { finalize } from 'rxjs/operators';
 import { EmailValidator } from 'src/app/core/validators/email.validator';
 import { CheckRegistrationService } from 'src/app/core/services/check-registration.service';
 import { SessionService } from 'src/app/core/services/session.service';
+import { NotificationService } from 'src/app/core/services/notification.service';
+import { NotFoundError } from 'rxjs';
 
 interface AuthResponse {
   message?: string;
@@ -30,7 +32,8 @@ export class LoginComponent {
     private router: Router,
     private fb: FormBuilder,
     private crs: CheckRegistrationService,
-    private session: SessionService
+    private session: SessionService,
+    private notify: NotificationService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, EmailValidator]],
@@ -41,7 +44,7 @@ export class LoginComponent {
   onLogin(): void {
     if (this.loginForm.invalid || this.isSubmitting) {
       this.loginForm.markAllAsTouched();
-      this.feedbackMessage = 'Please complete the form correctly.';
+      this.notify.showWarning('Warning', 'Please complete the form correctly.');
       return;
     }
 
@@ -78,25 +81,23 @@ export class LoginComponent {
                   }
                 },
 
-                error: () => {
-                  this.feedbackMessage =
-                    'Failed to verify account status.';
+                error: (err) => {
+                  this.notify.showError(err);
                 }
               });
 
               return;
             }
 
-            this.feedbackMessage = 'Token missing from response.';
+            this.notify.showMessage('Warning', 'Token missing from response.');
             return;
           }
 
-          this.feedbackMessage =
-            res?.message || 'Login failed. Please try again.';
+          this.notify.showError(res);
         },
 
-        error: () => {
-          this.feedbackMessage = 'Login failed. Please try again.';
+        error: (err) => {
+          this.notify.showError(err);
         }
       });
   }
